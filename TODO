@@ -1,0 +1,8 @@
+
+- Implementar classe Student
+	- Name
+	- Lastname
+	- Interation[day]
+
+- Implementar um DataLoader, parametros NAME, COURSE ou ALL.
+	- Array de Student
