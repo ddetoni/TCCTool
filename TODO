@@ -1,8 +1,9 @@
 
-- Implementar classe Student
-	- Name
+- Implementar classe Student (DONE)
+	- Name 
 	- Lastname
 	- Interation[day]
 
 - Implementar um DataLoader, parametros NAME, COURSE ou ALL.
-	- Array de Student
+	- Array de Student (DONE)
+	- Método de carregamento (DONE)
