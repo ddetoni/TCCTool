@@ -2,6 +2,7 @@
 
 import string
 import os, sys
+import pickle
 from student import Student
 
 class DataLoader:
@@ -44,6 +45,8 @@ class DataLoader:
         print "Starting to load \'" + folder_name + "\' file.\n" 
         
         data = open(folder_name)
+        
+        
         data_size = os.path.getsize(folder_name)
         data_processed = 0
         count_interaction = 0
@@ -75,6 +78,8 @@ class DataLoader:
             count_interaction += 1
         
         data.close()
+        #Serialization
+        pickle.dump(self.students, open(folder_name+".srz", 'wb'))
         
         print "\n"
         
