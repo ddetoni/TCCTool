@@ -60,6 +60,9 @@ class DataLoader:
             new_line = self.remove_white_space(line)
             split_line = string.split(new_line,"|")
             
+            if len(split_line) != 3:
+                continue
+            
             #Verify if student exist
             if self.students.has_key(split_line[0]+" "+split_line[1]):
                 student = self.students.get(split_line[0]+" "+split_line[1])
