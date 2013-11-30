@@ -41,10 +41,18 @@ class DataLoader:
     
     def loader(self, folder_name):
         data = open(folder_name)
+        
+        # Put the carret at the right place
+        data.readline()
+        data.readline()
             
         for line in data:
+            print line
             new_line = self.remove_invalid_space(line)
             split_line = string.split(new_line,"| ")
+            
+            if len(split_line) ==3 :
+                print "OK"
             
             if self.students.has_key(split_line[0]+" "+split_line[1]):
                 student = self.students.get(split_line[0]+" "+split_line[1])
@@ -54,7 +62,7 @@ class DataLoader:
                 student.set_interation(split_line[2])
                 self.students[split_line[0]+" "+split_line[1]] = student
         
-        print self.students
+        #print self.students
         
         
         
