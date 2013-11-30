@@ -10,7 +10,7 @@ class DataLoader:
     
     #Remove all the invalids white spaces from a line.
     #Return a string with the words separated by "| " 
-    def remove_invalid_space(self, file_line):
+    def remove_white_space(self, file_line):
         
         line_without_space = ""
         
@@ -24,13 +24,12 @@ class DataLoader:
             next_c = c
             
             #Case test for the variable actual_c
-            if previous_c != " " and actual_c == " " and next_c != " ":
+            if not actual_c.isspace():
                 line_without_space = line_without_space + actual_c
-            elif previous_c == " " and actual_c != " ":
-                line_without_space = line_without_space + actual_c
-            elif actual_c != " ":
+            elif (previous_c.isalpha() or previous_c.isdigit())  and (next_c.isalpha() or next_c.isdigit()):
                 line_without_space = line_without_space + actual_c
                 
+            
             previous_c = actual_c
             actual_c = next_c
         
@@ -47,12 +46,10 @@ class DataLoader:
         data.readline()
             
         for line in data:
-            print line
-            new_line = self.remove_invalid_space(line)
-            split_line = string.split(new_line,"| ")
+            new_line = self.remove_white_space(line)
+            split_line = string.split(new_line,"|")
             
-            if len(split_line) ==3 :
-                print "OK"
+            print split_line
             
             if self.students.has_key(split_line[0]+" "+split_line[1]):
                 student = self.students.get(split_line[0]+" "+split_line[1])
