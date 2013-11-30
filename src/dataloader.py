@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import string
+import os, sys
 from student import Student
 
 class DataLoader:
@@ -39,18 +40,26 @@ class DataLoader:
         return line_without_space
     
     def loader(self, folder_name):
+        
+        print "Starting to load \'" + folder_name + "\' file.\n" 
+        
         data = open(folder_name)
+        data_size = os.path.getsize(folder_name)
+        data_processed = 0
         
         # Put the carret at the right place
-        data.readline()
-        data.readline()
+        data_processed = data_processed + len(data.readline())
+        data_processed = data_processed + len(data.readline())
             
         for line in data:
+            
+            data_processed = data_processed + len(line)
+            self.progress_load(data_size, data_processed)
+            
             new_line = self.remove_white_space(line)
             split_line = string.split(new_line,"|")
             
-            print split_line
-            
+            #Verify if student exist
             if self.students.has_key(split_line[0]+" "+split_line[1]):
                 student = self.students.get(split_line[0]+" "+split_line[1])
                 student.set_interation(split_line[2])
@@ -59,7 +68,17 @@ class DataLoader:
                 student.set_interation(split_line[2])
                 self.students[split_line[0]+" "+split_line[1]] = student
         
-        #print self.students
+        data.close()
+        
+        print "\n"
+        
+    def progress_load(self, data_size, data_processed):
+        
+        percentage_done =data_processed/float(data_size)
+        
+        teste = "\rProgress: " + str(int(percentage_done*100))+"% DONE."
+        sys.stdout.write(teste)    # or print >> sys.stdout, "\r%d%%" %i,
+        sys.stdout.flush()
         
         
         

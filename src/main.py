@@ -10,4 +10,5 @@ from dataloader import DataLoader
 
 if __name__ == '__main__':
     
+    #DataLoader().loader('../data/logs_course_37.in')
     DataLoader().loader('../data/name.in')
