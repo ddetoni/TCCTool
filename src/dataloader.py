@@ -92,6 +92,8 @@ class DataLoader:
         self = pickle.load(open(srz_file_path,'r'))
         
         self.print_data_stats(self.count_interaction)
+        
+        return self
     
     def progress_load(self, data_size, data_processed):
         
