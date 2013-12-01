@@ -87,6 +87,8 @@ class DataLoader:
         print "\n"
         
         self.print_data_stats(self.count_interaction)
+        
+        return self
     
     def load_from_serial(self, srz_file_path):
         self = pickle.load(open(srz_file_path,'r'))
