@@ -9,6 +9,7 @@ class DataLoader:
     
     def __init__(self):
         self.students = {}
+        self.count_interaction = 0
     
     #Remove all the invalids white spaces from a line.
     #Return a string with the words separated by "| " 
@@ -40,16 +41,15 @@ class DataLoader:
         
         return line_without_space
     
-    def loader(self, folder_name):
+    def load_from_file(self, file_path):
         
-        print "Starting to load \'" + folder_name + "\' file.\n" 
+        print "Starting to load \'" + file_path + "\' file.\n" 
         
-        data = open(folder_name)
+        data = open(file_path)
         
         
-        data_size = os.path.getsize(folder_name)
+        data_size = os.path.getsize(file_path)
         data_processed = 0
-        count_interaction = 0
         
         # Put the carret at the right place
         data_processed = data_processed + len(data.readline())
@@ -75,16 +75,21 @@ class DataLoader:
                 student.set_interation(split_line[2])
                 self.students[split_line[0]+" "+split_line[1]] = student
                 
-            count_interaction += 1
+            self.count_interaction += 1
         
         data.close()
         #Serialization
-        pickle.dump(self.students, open(folder_name+".srz", 'wb'))
+        pickle.dump(self, open(file_path+".srz", 'wb'))
         
         print "\n"
         
-        self.print_data_stats(count_interaction)
+        self.print_data_stats(self.count_interaction)
+    
+    def load_from_serial(self, srz_file_path):
+        self = pickle.load(open(srz_file_path,'r'))
         
+        self.print_data_stats(self.count_interaction)
+    
     def progress_load(self, data_size, data_processed):
         
         percentage_done =data_processed/float(data_size)
