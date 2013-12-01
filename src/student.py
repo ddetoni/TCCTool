@@ -5,6 +5,10 @@ import datetime
 
 class Student:
     
+    name = None
+    last_name = None
+    interactions = None
+    
     def __init__(self, name, last_name):
         self.name = name
         self.last_name = last_name
@@ -14,9 +18,9 @@ class Student:
         
         date = datetime.datetime.fromtimestamp(float(timestamp))
         
-        if self.interactions.has_key(date.strftime('%m-%d')):
-            count_int = self.interactions[date.strftime('%m-%d')]
-            self.interactions[date.strftime('%m-%d')] = count_int + 1
+        if self.interactions.has_key(date.strftime('%m/%d')):
+            count_int = self.interactions[date.strftime('%m/%d')]
+            self.interactions[date.strftime('%m/%d')] = count_int + 1
         else:
-            self.interactions[date.strftime('%m-%d')] = 1
-            
+            self.interactions[date.strftime('%m/%d')] = 1
+        

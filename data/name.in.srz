@@ -22,10 +22,10 @@ p10
 sS'interactions'
 p11
 (dp12
-S'07-07'
+S'07/07'
 p13
 I6
-sS'07-08'
+sS'07/08'
 p14
 I1
 ssbsVMaria Cecilia Leites de Quadros
@@ -42,7 +42,7 @@ VMaria
 p19
 sg11
 (dp20
-S'07-07'
+S'07/07'
 p21
 I7
 ssbsVMercedes Nelly Gardey de Sánchez
@@ -59,10 +59,10 @@ VMercedes
 p26
 sg11
 (dp27
-S'07-07'
+S'07/07'
 p28
 I5
-sS'07-08'
+sS'07/08'
 p29
 I2
 ssbsVCláudia Mendes Vasconcelos
@@ -79,10 +79,10 @@ VCláudia
 p34
 sg11
 (dp35
-S'07-07'
+S'07/07'
 p36
 I6
-sS'07-08'
+sS'07/08'
 p37
 I1
 ssbssS'count_interaction'

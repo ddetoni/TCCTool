@@ -7,6 +7,9 @@ from student import Student
 
 class DataLoader:
     
+    students = None
+    count_interactions = None
+        
     def __init__(self):
         self.students = {}
         self.count_interaction = 0
