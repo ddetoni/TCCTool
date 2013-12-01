@@ -4,3 +4,7 @@
 *.png
 /data/
 /graphics/
+/.setting/
+.pyproject
+.pydevproject
+.gitignore~
