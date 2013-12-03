@@ -1,9 +1,11 @@
 
-- Implementar classe Student (DONE)
+- Implement class Student (DONE)
 	- Name 
 	- Lastname
 	- Interation[day]
 
-- Implementar um DataLoader, parametros NAME, COURSE ou ALL.
-	- Array de Student (DONE)
-	- Método de carregamento (DONE)
+- Implement a DataLoader, with arguments NAME, COURSE or ALL. (NOT YET)
+	- Array of Students (DONE)
+	- Loader method (DONE)
+
+- Make an interface command-line
