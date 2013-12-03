@@ -8,3 +8,5 @@
 .pyproject
 .pydevproject
 .gitignore~
+.project
+.settings/
