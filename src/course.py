@@ -13,3 +13,7 @@ class Course:
 
         self.students = {}
         self.name = name
+        
+    def del_student(self, student_name):
+        
+        del self.students[student_name]

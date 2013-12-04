@@ -38,10 +38,10 @@ if __name__ == '__main__':
     semester_1.info()
     semester_2.info()
     
-    teste = semester_1.normalize_students.difference(semester_2.normalize_students)
+    rep = list(semester_1.normalize_students.difference(semester_2.normalize_students))
     
+    semester_1.del_student(rep[0])
     
-    print len(teste)
     
     '''
     count = 0

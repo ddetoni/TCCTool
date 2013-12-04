@@ -74,3 +74,16 @@ class Semester:
             print "Semester don't normalized. Number of students unknown. \n"
         else:
             print "Total of students: " + str(len(self.normalize_students)) + "\n"
+
+    def del_student(self, student_name):
+        
+        course_names = self.courses.keys()
+        
+        for  c_name in course_names:
+            try:
+                self.courses[c_name].del_student(student_name)
+            except KeyError:
+                continue
+        
+        if self.normalize_students != None:
+            self.normalize_students.remove(student_name)
