@@ -87,3 +87,8 @@ class Semester:
         
         if self.normalize_students != None:
             self.normalize_students.remove(student_name)
+            
+    def del_students(self, student_list):
+        
+        for s_name in student_list:
+            self.del_student(s_name)

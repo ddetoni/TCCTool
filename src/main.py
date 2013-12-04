@@ -9,6 +9,7 @@ Created on 26/11/2013
 from dataloader import DataLoader
 from semester import Semester
 from visual_student_graphic import VisualStudentGraphic
+from src.util import dispproved
 
 if __name__ == '__main__':
     
@@ -32,17 +33,13 @@ if __name__ == '__main__':
     '''
     
     semester_1 = Semester('load').load('../data/semester_1/Semester_1.srz')
-
     semester_2 = Semester('load').load('../data/semester_2/Semester_2.srz')
     
+    dis_students = dispproved(semester_1, semester_2)
+    
+    semester_1.del_students(dis_students)
+    
     semester_1.info()
-    semester_2.info()
-    
-    rep = list(semester_1.normalize_students.difference(semester_2.normalize_students))
-    
-    semester_1.del_student(rep[0])
-    
-    
     '''
     count = 0
     fig_name = 'fig_'
