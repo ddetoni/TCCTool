@@ -28,7 +28,7 @@ class VisualStudentGraphic:
         
         #Convert date format and add to list
         x = [dt.datetime.strptime(d, '%m/%d').date() for d in dates]
-        #x.sort()
+        #Add interactions
         y = [self.student.interactions[d] for d in dates]
 
         #Format x axis
@@ -36,7 +36,7 @@ class VisualStudentGraphic:
         plt.gca().xaxis.set_major_locator(mdates.DayLocator())
 
         #Set date points and interactions points
-        plt.plot_date(x, y, '-', None, True)
+        plt.plot_date(x, y, 'o-', None, True)
 
         plt.xticks(xticks, rotation=80)
 
