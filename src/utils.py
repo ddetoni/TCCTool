@@ -17,3 +17,5 @@ def dispproved(semester1, semester2):
     dispproved = list(semester1.normalize_students.difference \
                     (semester2.normalize_students))
     return dispproved
+
+#def timestamp_from_day(list_timestamps):

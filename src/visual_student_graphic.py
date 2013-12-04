@@ -9,6 +9,7 @@ Created on 26/11/2013
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import datetime as dt
+import time
 
 
 class VisualStudentGraphic:
@@ -19,28 +20,29 @@ class VisualStudentGraphic:
 
         self.student = student
 
-        ticks = ['01/01', '02/01', '03/01', '04/01', '05/01', '06/01',
-                 '07/01', '08/01', '09/01', '10/01', '11/01', '12/01']
-        xticks = [dt.datetime.strptime(d, '%m/%d').date() for d in ticks]
+        ticks = ['01/01/13', '01/02/13', '01/03/13', '01/04/13', '01/05/13',
+                 '01/06/13', '01/07/13', '01/08/13', '01/09/13', '01/10/13',
+                 '01/11/13', '01/12/13']
+        xticks = [dt.datetime.strptime(d, '%d/%m/%y').date() for d in ticks]
 
         dates = self.student.interactions.keys()
-        dates.sort()
+        dates.sort(key=lambda x: time.mktime(time.strptime(x,"%d/%m/%y")))
         
         #Convert date format and add to list
-        x = [dt.datetime.strptime(d, '%m/%d').date() for d in dates]
+        x = [dt.datetime.strptime(d, '%d/%m/%y').date() for d in dates]
         #Add interactions
         y = [self.student.interactions[d] for d in dates]
 
         #Format x axis
-        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m/%y'))
         plt.gca().xaxis.set_major_locator(mdates.DayLocator())
 
         #Set date points and interactions points
         plt.plot_date(x, y, 'o-', None, True)
 
-        plt.xticks(xticks, rotation=80)
+        plt.xticks(xticks, rotation=30)
 
-        plt.ylabel('Interaction number')
+        plt.ylabel('Number of Interactions')
         plt.xlabel('Day')
         plt.title(self.student.name + ' ' + self.student.last_name +
                   ' - Interaction Graphic')
