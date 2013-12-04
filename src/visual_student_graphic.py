@@ -24,10 +24,11 @@ class VisualStudentGraphic:
         xticks = [dt.datetime.strptime(d, '%m/%d').date() for d in ticks]
 
         dates = self.student.interactions.keys()
-
+        dates.sort()
+        
         #Convert date format and add to list
         x = [dt.datetime.strptime(d, '%m/%d').date() for d in dates]
-        x.sort()
+        #x.sort()
         y = [self.student.interactions[d] for d in dates]
 
         #Format x axis

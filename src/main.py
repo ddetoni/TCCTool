@@ -11,8 +11,11 @@ from visual_student_graphic import VisualStudentGraphic
 
 if __name__ == '__main__':
 
-    data = DataLoader().load_from_file('../data/logs_course_37.in')
-    #data = DataLoader().load_from_file('../data/name.in')
+    
+    course2 = DataLoader().load_from_file('../data/semester_2/logs_course_62.in')
+    
+    course = DataLoader().load_from_serial('../data/semester_2/logs_course_62.in.srz')
+    
     #data = DataLoader().load_from_serial('../data/name.in.srz')
     #data = DataLoader().load_from_serial('../data/logs_course_37.in.srz')
     '''
@@ -28,8 +31,17 @@ if __name__ == '__main__':
         vsg.save_fig('../graphics/', fig_name+str(count))
         count += 1
     '''
-    student = data.students[u"Natália Moreira Viana"]
-
+    
+    if course != course2:
+        print "igual"
+    
+    student = course.students[u"Eolita Pozzebon"]
+    
+    student2 = course2.students[u"Eolita Pozzebon"]
+    
     vsg = VisualStudentGraphic(student)
+    vsg.plot()
+    
+    vsg = VisualStudentGraphic(student2)
     vsg.plot()
     #vsg.save_fig('./','teste')

@@ -5,15 +5,16 @@ import os
 import sys
 import pickle
 from student import Student
+from course import Course
 
 
 class DataLoader:
 
-    students = None
+    course = None
     count_interactions = None
 
     def __init__(self):
-        self.students = {}
+        self.course = Course()
         self.count_interaction = 0
 
     #Remove all the invalids white spaces from a line.
@@ -75,32 +76,32 @@ class DataLoader:
             first_name = split_line[0]
             last_name = split_line[1]
             timestamp = split_line[2]
-            if complete_name in self.students:
-                student = self.students.get(complete_name)
+            if complete_name in self.course.students:
+                student = self.course.students.get(complete_name)
                 student.set_interation(split_line[2])
             else:
                 student = Student(first_name, last_name)
                 student.set_interation(timestamp)
-                self.students[complete_name] = student
+                self.course.students[complete_name] = student
 
             self.count_interaction += 1
 
         data.close()
         #Serialization
-        pickle.dump(self, open(file_path+".srz", 'wb'))
+        pickle.dump(self.course, open(file_path+".srz", 'wb'))
 
         print "\n"
 
         self.print_data_stats(self.count_interaction)
 
-        return self
+        return self.course
 
     def load_from_serial(self, srz_file_path):
-        self = pickle.load(open(srz_file_path, 'r'))
+        self.course = pickle.load(open(srz_file_path, 'r'))
 
         self.print_data_stats(self.count_interaction)
 
-        return self
+        return self.course
 
     def progress_load(self, data_size, data_processed):
 
@@ -112,7 +113,7 @@ class DataLoader:
 
     def print_data_stats(self, count_interaction):
 
-        total_students = len(self.students.keys())
+        total_students = len(self.course.students.keys())
         interactions_per_student = count_interaction/total_students
 
         print "Total students: " + str(total_students)
