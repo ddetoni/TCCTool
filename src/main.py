@@ -13,27 +13,35 @@ from visual_student_graphic import VisualStudentGraphic
 if __name__ == '__main__':
     
     '''
-    semester = Semester("Semester_1")
+    semester_2 = Semester("Semester_2")
     
-    course0 = DataLoader().load_from_file('../data/semester_1/logs_course_35.in', 'APE_I')
-    course1 = DataLoader().load_from_file('../data/semester_1/logs_course_36.in', 'PE_I')
-    course2 = DataLoader().load_from_file('../data/semester_1/logs_course_37.in', 'EPP_I')
-    course3 = DataLoader().load_from_file('../data/semester_1/logs_course_38.in', 'EC_I')
-    course4 = DataLoader().load_from_file('../data/semester_1/logs_course_39.in', 'EAD_I')
+    course0 = DataLoader().load_from_file('../data/semester_2/logs_course_61.in', 'EAD_II')
+    course1 = DataLoader().load_from_file('../data/semester_2/logs_course_62.in', 'EPP_II')
+    course2 = DataLoader().load_from_file('../data/semester_2/logs_course_63.in', 'EC_II')
+    course3 = DataLoader().load_from_file('../data/semester_2/logs_course_64.in', 'AP_II')
+    course4 = DataLoader().load_from_file('../data/semester_2/logs_course_65.in', 'PE_II')
     
-    semester.courses[course0.name] = course0
-    semester.courses[course1.name] = course1
-    semester.courses[course2.name] = course2
-    semester.courses[course3.name] = course3
-    semester.courses[course4.name] = course4
+    semester_2.courses[course0.name] = course0
+    semester_2.courses[course1.name] = course1
+    semester_2.courses[course2.name] = course2
+    semester_2.courses[course3.name] = course3
+    semester_2.courses[course4.name] = course4
     
-    semester.save("../data/semester_1/")
+    semester_2.normalize()
+    semester_2.save("../data/semester_2/")
     '''
     
-    semester = Semester('load').load('../data/semester_1/Semester_1.srz')
-    semester.normalize()
+    semester_1 = Semester('load').load('../data/semester_1/Semester_1.srz')
+
+    semester_2 = Semester('load').load('../data/semester_2/Semester_2.srz')
     
-    semester.print_all_student_names()
+    semester_1.info()
+    semester_2.info()
+    
+    teste = semester_1.normalize_students.difference(semester_2.normalize_students)
+    
+    
+    print len(teste)
     
     '''
     count = 0

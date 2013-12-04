@@ -19,7 +19,7 @@ class Semester:
     #This fuction remove the students that are not in all the courses.
     def normalize(self):
         
-        print "Normalizing semester..."
+        #print "Normalizing semester..."
         course_names = self.courses.keys();
         
         for c_name in course_names:
@@ -44,8 +44,8 @@ class Semester:
                 s_name = diff_students.pop()
                 del self.courses[c_name].students[s_name]
         
-        print "Semester normalized.\n"
-    
+        #print "Semester normalized.\n"
+
     #Save a serialization of semester
     def save(self, file_path):
 
@@ -64,3 +64,13 @@ class Semester:
         
         for name in student_names:
             print name
+    
+    def info(self):
+
+        print "Info: " + self.name
+        print "Number of courses: " + str(len(self.courses))
+        
+        if self.normalize_students == None:
+            print "Semester don't normalized. Number of students unknown. \n"
+        else:
+            print "Total of students: " + str(len(self.normalize_students)) + "\n"
