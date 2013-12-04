@@ -4,7 +4,7 @@ Created on 04/12/2013
 @author: douglas
 '''
 
-class semester:
+class Semester:
 
     courses = None
     name = None

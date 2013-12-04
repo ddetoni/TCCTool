@@ -7,13 +7,20 @@ Created on 26/11/2013
 '''
 
 from dataloader import DataLoader
+from semester import Semester
 from visual_student_graphic import VisualStudentGraphic
 
 if __name__ == '__main__':
-
-    course = DataLoader().load_from_file('../data/semester_1/logs_course_39.in')
     
-
+    semester = Semester("Semester_1")
+    
+    course = DataLoader().load_from_file('../data/semester_1/logs_course_35.in', 'APE_I')
+    
+    print "Course Name: " + course.name
+    
+    
+    
+    '''
     count = 0
     fig_name = 'fig_'
 
@@ -27,6 +34,7 @@ if __name__ == '__main__':
         print "Save FIG: "+fig_name+str(count)
         count += 1
 
+    '''
     '''
     student = course.students[u"Eolita Pozzebon"]
     

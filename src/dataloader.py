@@ -10,13 +10,6 @@ from course import Course
 
 class DataLoader:
 
-    course = None
-    count_interactions = None
-
-    def __init__(self):
-        self.course = Course()
-        self.count_interaction = 0
-
     #Remove all the invalids white spaces from a line.
     #Return a string with the words separated by "| "
     def remove_white_space(self, file_line):
@@ -47,10 +40,10 @@ class DataLoader:
 
         return line_without_space
 
-    def load_from_file(self, file_path):
+    def load_from_file(self, file_path, name_course):
 
         print "Starting to load \'" + file_path + "\' file.\n"
-
+        
         data = open(file_path)
 
         data_size = os.path.getsize(file_path)
@@ -59,6 +52,9 @@ class DataLoader:
         # Put the carret at the right place
         data_processed = data_processed + len(data.readline())
         data_processed = data_processed + len(data.readline())
+
+        course = Course(name_course)
+        count_interaction = 0
 
         for line in data:
 
@@ -76,25 +72,25 @@ class DataLoader:
             first_name = split_line[0]
             last_name = split_line[1]
             timestamp = split_line[2]
-            if complete_name in self.course.students:
-                student = self.course.students.get(complete_name)
+            if complete_name in course.students:
+                student = course.students.get(complete_name)
                 student.set_interation(split_line[2])
             else:
                 student = Student(first_name, last_name)
                 student.set_interation(timestamp)
-                self.course.students[complete_name] = student
+                course.students[complete_name] = student
 
-            self.count_interaction += 1
+            count_interaction += 1
 
         data.close()
         #Serialization
-        pickle.dump(self.course, open(file_path+".srz", 'wb'))
+        #pickle.dump(course, open(file_path+".srz", 'wb'))
 
         print "\n"
 
-        self.print_data_stats(self.count_interaction)
+        self.print_data_stats(count_interaction, course)
 
-        return self.course
+        return course
 
     def load_from_serial(self, srz_file_path):
         self.course = pickle.load(open(srz_file_path, 'r'))
@@ -111,9 +107,9 @@ class DataLoader:
         sys.stdout.write(teste)    # or print >> sys.stdout, "\r%d%%" %i,
         sys.stdout.flush()
 
-    def print_data_stats(self, count_interaction):
+    def print_data_stats(self, count_interaction, course):
 
-        total_students = len(self.course.students.keys())
+        total_students = len(course.students.keys())
         interactions_per_student = count_interaction/total_students
 
         print "Total students: " + str(total_students)
