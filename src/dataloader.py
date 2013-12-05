@@ -44,14 +44,20 @@ class DataLoader:
             first_name = split_line[0]
             last_name = split_line[1]
             timestamp = split_line[2]
+            
+            conf_interaction = None
             if complete_name in course.students:
                 student = course.students.get(complete_name)
-                student.set_interation(timestamp)
+                conf_interaction = student.set_interation(timestamp)
             else:
                 student = Student(first_name, last_name)
-                student.set_interation(timestamp)
+                conf_interaction = student.set_interation(timestamp)
                 course.students[complete_name] = student
-
+            
+            #Exclude the invalid dates
+            if conf_interaction != 0:    
+                course.add_to_average(timestamp, 1)
+            
             count_interaction += 1
 
         data.close()
