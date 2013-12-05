@@ -11,15 +11,15 @@ class Test(unittest.TestCase):
 
 
     def setUp(self):
-        self.stu = Student('João', 'Silva')
+        self.stu = Student('Carlos', u'Silva')
         self.course = Course('JS_I')
-        self.course.students['João Silva'] = self.stu
+        self.course.students['Carlos Silva'] = self.stu
         
 
     def testDelStudent(self):
-        self.course.del_student('João Silva')
+        self.course.del_student('Carlos Silva')
         with self.assertRaises(KeyError):
-            self.course.students['João Silva']
+            self.course.students['Carlos Silva']
         
 
 if __name__ == "__main__":
