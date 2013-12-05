@@ -9,7 +9,7 @@ Created on 26/11/2013
 from dataloader import DataLoader
 from semester import Semester
 from visual_student_graphic import VisualStudentGraphic
-from src.utils import dispproved
+from src.utils import *
 
 if __name__ == '__main__':
     '''
@@ -58,24 +58,25 @@ if __name__ == '__main__':
     #semester_1.del_students(dis_students)
     
     #semester_1.info()
-    '''
+    
     count = 0
     fig_name = 'fig_'
 
-    student_names = course.students.keys()
+    student_names = course0.students.keys()
 
     for name in student_names:
-        student = course.students[name]
+        student = course0.students[name]
 
         vsg = VisualStudentGraphic(student)
-        vsg.save_fig('../graphics/semester_1/39/', fig_name+str(count))
+        vsg.save_fig('../graphics/semester_1/35/', fig_name+str(count))
         print "Save FIG: "+fig_name+str(count)
         count += 1
 
-    '''
-
-    student = course0.students[u"Luciane Senna Ferreira"]
+    #student = course0.students[u"Heloisa Helena Duval De Azevedo"]
     
-    vsg = VisualStudentGraphic(student)
-    vsg.plot()
+    #vsg = VisualStudentGraphic(student)
+    #vsg.plot()
     #vsg.save_fig('./','teste')
+    
+    #print convert_day_week("01/05/2013")
+    
