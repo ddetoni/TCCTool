@@ -7,7 +7,7 @@ from src.utils import week_interaction
 import matplotlib.pyplot as plt
 
 
-def build_graphic(student):
+def build_graphic(student, average = None):
     
         #52 weeks -> year
         ticks = range(0, 53, 4)
@@ -23,7 +23,20 @@ def build_graphic(student):
 
         #Set week points and interactions points
         plt.plot(x, y, 'o-', None, True)
+        
+        if average != None:
+            week_interactions = week_interaction(average)
 
+            weeks = week_interactions.keys()
+            weeks.sort()
+
+            xAv = weeks
+            #Add week interactions
+            yAv = [week_interactions[w] for w in weeks]
+            
+            plt.plot(xAv, yAv, 'o-', None, True)
+        
+        
         plt.xticks(ticks)
 
         plt.ylabel('Number of Interactions')
@@ -42,7 +55,7 @@ def save_graphic_course(course, save_path):
     for name in student_names:
         student = course.students[name]
 
-        plt = build_graphic(student)
+        plt = build_graphic(student, course.get_average())
         save_graphic(plt, save_path, g_name+str(count))
         print "Save GRAPHIC: "+g_name+str(count)
         count += 1
