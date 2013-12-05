@@ -28,5 +28,7 @@ class Student:
         if date in self.interactions:
             count_int = self.interactions[date]
             self.interactions[date] = count_int + 1
+            return count_int + 1
         else:
             self.interactions[date] = 1
+            return 1
