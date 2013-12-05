@@ -16,5 +16,7 @@ class Course:
         self.name = name
 
     def del_student(self, student_name):
-
-        del self.students[student_name]
+        try:
+            del self.students[student_name]
+        except KeyError:
+            return None
