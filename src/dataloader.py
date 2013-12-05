@@ -43,7 +43,7 @@ class DataLoader:
     def load_from_file(self, file_path, name_course):
 
         print "Starting to load \'" + file_path + "\' file.\n"
-        
+
         data = open(file_path)
 
         data_size = os.path.getsize(file_path)

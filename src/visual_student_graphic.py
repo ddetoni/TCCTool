@@ -24,10 +24,10 @@ class VisualStudentGraphic:
         ticks = range(0, 53, 4)
 
         week_interactions = week_interaction(self.student.interactions)
-        
+
         weeks = week_interactions.keys()
         weeks.sort()
-        
+
         x = weeks
         #Add week interactions
         y = [week_interactions[w] for w in weeks]

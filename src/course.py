@@ -4,6 +4,7 @@ Created on 04/12/2013
 @author: douglas
 '''
 
+
 class Course:
 
     students = None
@@ -13,7 +14,7 @@ class Course:
 
         self.students = {}
         self.name = name
-        
+
     def del_student(self, student_name):
-        
+
         del self.students[student_name]

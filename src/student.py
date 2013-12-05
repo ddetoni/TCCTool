@@ -16,13 +16,13 @@ class Student:
         self.interactions = {}
 
     def set_interation(self, timestamp):
-        
+
         date = datetime.datetime.fromtimestamp(float(timestamp))
-        
+
         #Interactions limited at 2013 year.
         if date.year != 2013:
             return
-        
+
         #Date formated
         date = date.strftime('%d/%m/%y')
         if date in self.interactions:
