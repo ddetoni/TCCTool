@@ -13,7 +13,7 @@ class DataLoader:
 
     def load_from_file(self, file_path, name_course):
 
-        print "Starting to load \'" + file_path + "\' file.\n"
+        print "\nStarting to load \'" + file_path + "\' file.\n"
 
         data = open(file_path)
 
@@ -35,6 +35,7 @@ class DataLoader:
             new_line = remove_white_space(line)
             split_line = string.split(new_line, "|")
 
+            #split_line must have 3 position
             if len(split_line) != 3:
                 continue
 
@@ -54,11 +55,8 @@ class DataLoader:
             count_interaction += 1
 
         data.close()
-        #Serialization
-        #pickle.dump(course, open(file_path+".srz", 'wb'))
 
         print "\n"
-
         self.print_data_stats(count_interaction, course)
 
         return course
@@ -84,5 +82,5 @@ class DataLoader:
         interactions_per_student = count_interaction/total_students
 
         print "Total students: " + str(total_students)
-        print "Total interations: " + str(count_interaction)
+        print "Total interactions: " + str(count_interaction)
         print "Interactions per student: " + str(interactions_per_student)
