@@ -12,6 +12,10 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         self.stu = Student('Carlos', 'Silva')
+        
+        self.stu.interactions = {'01/01/13':17, '31/12/13':2,
+                                 '05/05/13': 18}
+        
         self.stu1 = Student('Carlos', 'Antonio')
         self.stu2 = Student('Carlos', 'Mario')
         self.course = Course('JS_I')
@@ -21,35 +25,40 @@ class Test(unittest.TestCase):
         
 
     def testDelStudent(self):
+        self.course.overall_average = {'01/01/13':27, '31/12/13':5,
+                                       '05/05/13': 22, '25/02/13':20}
         self.course.del_student('Carlos Silva')
         with self.assertRaises(KeyError):
             self.course.students['Carlos Silva']
+        self.assertEqual(self.course.overall_average, 
+                         {'01/01/13':10, '31/12/13':3,
+                          '05/05/13': 4, '25/02/13':20})
     
     def testAddToAverage(self):
-        self.course.add_to_average('01/01/2013', 1)
-        self.course.add_to_average('01/01/2013', 1)
-        self.course.add_to_average('31/12/2013', 1)
-        self.course.add_to_average('05/05/2013', 1)
-        self.course.add_to_average('05/05/2013', 1)
-        self.course.add_to_average('01/01/2013', 1)
-        self.course.add_to_average('31/12/2013', 1)
+        self.course.add_to_average('1357082141', 1)
+        self.course.add_to_average('1357082141', 1)
+        self.course.add_to_average('1388531741', 1)
+        self.course.add_to_average('1367799341', 1)
+        self.course.add_to_average('1367799341', 1)
+        self.course.add_to_average('1357082141', 1)
+        self.course.add_to_average('1388531741', 1)
         
         self.assertEqual(self.course.overall_average, 
-                         {'01/01/2013':3, '31/12/2013':2,
-                          '05/05/2013': 2})
+                         {'01/01/13':3, '31/12/13':2,
+                          '05/05/13': 2})
         
     def testGetAverage(self):
-        self.course.add_to_average('01/01/2013', 8)
-        self.course.add_to_average('01/01/2013', 32)
-        self.course.add_to_average('31/12/2013', 15)
-        self.course.add_to_average('05/05/2013', 7)
-        self.course.add_to_average('05/05/2013', 60)
-        self.course.add_to_average('01/01/2013', 41)
-        self.course.add_to_average('31/12/2013', 1)
+        self.course.add_to_average('1357082141', 8)
+        self.course.add_to_average('1357082141', 32)
+        self.course.add_to_average('1388531741', 15)
+        self.course.add_to_average('1367799341', 7)
+        self.course.add_to_average('1367799341', 60)
+        self.course.add_to_average('1357082141', 41)
+        self.course.add_to_average('1388531741', 1)
         
         self.assertEqual(self.course.get_average(),
-                         {'01/01/2013':27, '31/12/2013':5,
-                          '05/05/2013': 22})
+                         {'01/01/13':27, '31/12/13':5,
+                          '05/05/13': 22})
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

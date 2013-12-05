@@ -20,6 +20,15 @@ class Course:
 
     def del_student(self, student_name):
         try:
+            
+            dates = self.students[student_name].interactions.keys()
+            
+            for date in dates:
+                
+                if date in self.overall_average:
+                    self.overall_average[date] -= self.students[student_name]. \
+                        interactions[date]
+            
             del self.students[student_name]
         except KeyError:
             return None
