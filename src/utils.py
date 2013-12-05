@@ -41,7 +41,6 @@ def convert_day_week(date_interaction):
 
     return count_days/7
 
-
 #Calculate the interactions by week
 def week_interaction(day_interactions):
 
@@ -59,3 +58,33 @@ def week_interaction(day_interactions):
             week_interactions[week] = day_interactions[day]
 
     return week_interactions
+
+#Remove all the invalids white spaces from a line.
+#Return a string with the words separated by "| "
+def remove_white_space(file_line):
+
+    line_without_space = ""
+
+    previous_c = " "
+    actual_c = " "
+    next_c = " "
+
+    line = unicode(file_line, encoding="utf-8")
+
+    for c in line:
+        next_c = c
+
+        #Case test for the variable actual_c
+        if not actual_c.isspace():
+            line_without_space = line_without_space + actual_c
+        elif (previous_c.isalpha() or previous_c.isdigit()) and \
+                (next_c.isalpha() or next_c.isdigit()):
+            line_without_space = line_without_space + actual_c
+
+        previous_c = actual_c
+        actual_c = next_c
+
+    if next_c != "\n" and next_c != " ":
+        line_without_space = line_without_space + next_c
+
+    return line_without_space

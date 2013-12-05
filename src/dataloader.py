@@ -6,39 +6,10 @@ import sys
 import pickle
 from student import Student
 from course import Course
+from src.utils import remove_white_space
 
 
 class DataLoader:
-
-    #Remove all the invalids white spaces from a line.
-    #Return a string with the words separated by "| "
-    def remove_white_space(self, file_line):
-
-        line_without_space = ""
-
-        previous_c = " "
-        actual_c = " "
-        next_c = " "
-
-        line = unicode(file_line, encoding="utf-8")
-
-        for c in line:
-            next_c = c
-
-            #Case test for the variable actual_c
-            if not actual_c.isspace():
-                line_without_space = line_without_space + actual_c
-            elif (previous_c.isalpha() or previous_c.isdigit()) and \
-                    (next_c.isalpha() or next_c.isdigit()):
-                line_without_space = line_without_space + actual_c
-
-            previous_c = actual_c
-            actual_c = next_c
-
-        if next_c != "\n":
-            line_without_space = line_without_space + next_c
-
-        return line_without_space
 
     def load_from_file(self, file_path, name_course):
 
@@ -61,7 +32,7 @@ class DataLoader:
             data_processed = data_processed + len(line)
             self.progress_load(data_size, data_processed)
 
-            new_line = self.remove_white_space(line)
+            new_line = remove_white_space(line)
             split_line = string.split(new_line, "|")
 
             if len(split_line) != 3:
