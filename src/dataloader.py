@@ -45,7 +45,7 @@ class DataLoader:
             timestamp = split_line[2]
             if complete_name in course.students:
                 student = course.students.get(complete_name)
-                student.set_interation(split_line[2])
+                student.set_interation(timestamp)
             else:
                 student = Student(first_name, last_name)
                 student.set_interation(timestamp)
