@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import os
 
 
-def build_graphic(student, average = None):
-    
+def build_graphic(student, average=None):
+
         #52 weeks -> year
         ticks = range(0, 53, 4)
 
@@ -24,8 +24,8 @@ def build_graphic(student, average = None):
 
         #Set week points and interactions points
         plt.plot(x, y, 'o-', None, True)
-        
-        if average != None:
+
+        if average is not None:
             week_interactions = week_interaction(average)
 
             weeks = week_interactions.keys()
@@ -34,24 +34,24 @@ def build_graphic(student, average = None):
             xAv = weeks
             #Add week interactions
             yAv = [week_interactions[w] for w in weeks]
-            
+
             plt.plot(xAv, yAv, 'o-', None, True)
-        
-        
+
         plt.xticks(ticks)
 
         plt.ylabel('Number of Interactions')
         plt.xlabel('Week')
         plt.title(student.name + ' ' + student.last_name +
                   ' - Interaction Graphic')
-        
+
         return plt
 
+
 def save_graphic_course(course, save_path):
-    
+
     if not os.path.exists(save_path):
         os.mkdir(save_path)
-    
+
     count = 0
     g_name = 'graphic_'
 
@@ -64,23 +64,25 @@ def save_graphic_course(course, save_path):
         save_graphic(plt, save_path, g_name+str(count))
         count += 1
 
+
 def save_graphic_semester(semester, save_path):
 
     if not os.path.exists(save_path):
         os.mkdir(save_path)
-    
+
     course_names = semester.courses.keys()
-    
+
     for c_name in course_names:
-        save_graphic_course(semester.courses[c_name], 
+        save_graphic_course(semester.courses[c_name],
                             save_path + c_name + '/')
+
 
 def show_graphic(plt):
     plt.show()
 
+
 def save_graphic(plt, save_path, save_name):
     final_path = save_path+save_name+".png"
-    print 'Saving GRAPHIC: ' + final_path 
+    print 'Saving GRAPHIC: ' + final_path
     plt.savefig(final_path, format='png')
     plt.close()
-    

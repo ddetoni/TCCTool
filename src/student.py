@@ -21,7 +21,7 @@ class Student:
 
         #Interactions limited at 2013 year.
         if date.year != 2013:
-            return 0
+            return None
 
         #Date formated
         date = date.strftime('%d/%m/%y')

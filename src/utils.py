@@ -41,6 +41,7 @@ def convert_day_week(date_interaction):
 
     return count_days/7
 
+
 #Calculate the interactions by week
 def week_interaction(day_interactions):
 
@@ -58,6 +59,7 @@ def week_interaction(day_interactions):
             week_interactions[week] = day_interactions[day]
 
     return week_interactions
+
 
 #Remove all the invalids white spaces from a line.
 #Return a string with the words separated by "| "
