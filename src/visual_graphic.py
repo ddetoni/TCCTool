@@ -5,6 +5,7 @@ Created on 05/12/2013
 '''
 from src.utils import week_interaction
 import matplotlib.pyplot as plt
+import os
 
 
 def build_graphic(student, average = None):
@@ -47,6 +48,10 @@ def build_graphic(student, average = None):
         return plt
 
 def save_graphic_course(course, save_path):
+    
+    if not os.path.exists(save_path):
+        os.mkdir(save_path)
+    
     count = 0
     g_name = 'graphic_'
 
@@ -57,17 +62,25 @@ def save_graphic_course(course, save_path):
 
         plt = build_graphic(student, course.get_average())
         save_graphic(plt, save_path, g_name+str(count))
-        print "Save GRAPHIC: "+g_name+str(count)
         count += 1
 
-def save_graphic_semester():
-    pass
+def save_graphic_semester(semester, save_path):
+
+    if not os.path.exists(save_path):
+        os.mkdir(save_path)
+    
+    course_names = semester.courses.keys()
+    
+    for c_name in course_names:
+        save_graphic_course(semester.courses[c_name], 
+                            save_path + c_name + '/')
 
 def show_graphic(plt):
     plt.show()
 
 def save_graphic(plt, save_path, save_name):
     final_path = save_path+save_name+".png"
+    print 'Saving GRAPHIC: ' + final_path 
     plt.savefig(final_path, format='png')
     plt.close()
     

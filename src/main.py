@@ -8,15 +8,14 @@ Created on 26/11/2013
 
 from dataloader import DataLoader
 from semester import Semester
-from src.visual_graphic import save_graphic_course
+from src.visual_graphic import save_graphic_semester
+from src.utils import dispproved
 
 if __name__ == '__main__':
     '''
     semester_1 = Semester("Semester_1")
-    '''
-    course0 = DataLoader().load_from_file('../data/semester_1/logs_course_35.in', 'APE_I')
     
-    '''
+    course0 = DataLoader().load_from_file('../data/semester_1/logs_course_35.in', 'APE_I')
     course1 = DataLoader().load_from_file('../data/semester_1/logs_course_36.in', 'PEI_I')
     course2 = DataLoader().load_from_file('../data/semester_1/logs_course_37.in', 'EPP_I')
     course3 = DataLoader().load_from_file('../data/semester_1/logs_course_38.in', 'EC_I')
@@ -49,14 +48,14 @@ if __name__ == '__main__':
     semester_2.save("../data/semester_2/")
     '''
     
-    #semester_1 = Semester('load').load('../data/semester_1/Semester_1.srz')
-    #semester_2 = Semester('load').load('../data/semester_2/Semester_2.srz')
+    semester_1 = Semester('load').load('../data/semester_1/Semester_1.srz')
+    semester_2 = Semester('load').load('../data/semester_2/Semester_2.srz')
     
-    #dis_students = dispproved(semester_1, semester_2)
+    dis_students = dispproved(semester_1, semester_2)
     
-    #semester_1.del_students(dis_students)
+    semester_1.del_students(dis_students)
     
-    #semester_1.info()
+    semester_1.info()
     
-    save_graphic_course(course0, '../data/')
+    save_graphic_semester(semester_1, '../graphics/semester_1/')
     
