@@ -24,38 +24,38 @@ class Test(unittest.TestCase):
         self.course.students['Carlos Mario'] = self.stu2
 
     def testDelStudent(self):
-        self.course.overall_average = {'01/01/13': 27, '31/12/13': 5,
+        self.course.total_interactions_each_week = {'01/01/13': 27, '31/12/13': 5,
                                        '05/05/13': 22, '25/02/13': 20}
         self.course.del_student('Carlos Silva')
         with self.assertRaises(KeyError):
             self.course.students['Carlos Silva']
-        self.assertEqual(self.course.overall_average,
+        self.assertEqual(self.course.total_interactions_each_week,
                          {'01/01/13': 10, '31/12/13': 3,
                           '05/05/13': 4, '25/02/13': 20})
 
-    def testAddToAverage(self):
-        self.course.add_to_average('1357082141', 1)
-        self.course.add_to_average('1357082141', 1)
-        self.course.add_to_average('1388531741', 1)
-        self.course.add_to_average('1367799341', 1)
-        self.course.add_to_average('1367799341', 1)
-        self.course.add_to_average('1357082141', 1)
-        self.course.add_to_average('1388531741', 1)
+    def testAddToWeekAverage(self):
+        self.course.add_to_week_average('1357082141', 1)
+        self.course.add_to_week_average('1357082141', 1)
+        self.course.add_to_week_average('1388531741', 1)
+        self.course.add_to_week_average('1367799341', 1)
+        self.course.add_to_week_average('1367799341', 1)
+        self.course.add_to_week_average('1357082141', 1)
+        self.course.add_to_week_average('1388531741', 1)
 
-        self.assertEqual(self.course.overall_average,
+        self.assertEqual(self.course.total_interactions_each_week,
                          {'01/01/13': 3, '31/12/13': 2,
                           '05/05/13': 2})
 
     def testGetAverage(self):
-        self.course.add_to_average('1357082141', 8)
-        self.course.add_to_average('1357082141', 32)
-        self.course.add_to_average('1388531741', 15)
-        self.course.add_to_average('1367799341', 7)
-        self.course.add_to_average('1367799341', 60)
-        self.course.add_to_average('1357082141', 41)
-        self.course.add_to_average('1388531741', 1)
+        self.course.add_to_week_average('1357082141', 8)
+        self.course.add_to_week_average('1357082141', 32)
+        self.course.add_to_week_average('1388531741', 15)
+        self.course.add_to_week_average('1367799341', 7)
+        self.course.add_to_week_average('1367799341', 60)
+        self.course.add_to_week_average('1357082141', 41)
+        self.course.add_to_week_average('1388531741', 1)
 
-        self.assertEqual(self.course.get_average(),
+        self.assertEqual(self.course.get_average_each_week(),
                          {'01/01/13': 27, '31/12/13': 5,
                           '05/05/13': 22})
 

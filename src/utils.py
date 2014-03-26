@@ -14,7 +14,7 @@ def approved(semester1, semester2):
     return approved
 
 
-#This method return the dispproved students
+#This method return the disapproved students
 def dispproved(semester1, semester2):
 
     dispproved = list(semester1.normalize_students.difference(

@@ -9,14 +9,16 @@ import datetime
 class Course:
 
     students = None
+    professors = None
     name = None
-    overall_average = None
+    total_interactions_each_week = None
 
     def __init__(self, name):
 
         self.students = {}
+        self.professors = {}
         self.name = name
-        self.overall_average = {}
+        self.total_interactions_each_week = {}
 
     def del_student(self, student_name):
         try:
@@ -24,33 +26,33 @@ class Course:
 
             for date in dates:
 
-                if date in self.overall_average:
-                    self.overall_average[date] -= \
+                if date in self.total_interactions_each_week:
+                    self.total_interactions_each_week[date] -= \
                         self.students[student_name].interactions[date]
 
             del self.students[student_name]
         except KeyError:
             return None
 
-    def add_to_average(self, timestamp, n_interaction):
+    def add_to_week_average(self, timestamp, n_interaction):
 
         date = datetime.datetime.fromtimestamp(float(timestamp))
 
         #Date formated
         date = date.strftime('%d/%m/%y')
-        if date in self.overall_average:
-            self.overall_average[date] += n_interaction
+        if date in self.total_interactions_each_week:
+            self.total_interactions_each_week[date] += n_interaction
         else:
-            self.overall_average[date] = n_interaction
+            self.total_interactions_each_week[date] = n_interaction
 
-    def get_average(self):
+    def get_average_each_week(self):
 
         average = {}
         total_students = len(self.students)
-        keys = self.overall_average.keys()
+        keys = self.total_interactions_each_week.keys()
 
         for date in keys:
-            interactions = self.overall_average[date]
+            interactions = self.total_interactions_each_week[date]
             average[date] = interactions/total_students
 
         return average

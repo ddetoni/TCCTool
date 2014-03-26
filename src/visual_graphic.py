@@ -60,7 +60,7 @@ def save_graphic_course(course, save_path):
     for name in student_names:
         student = course.students[name]
 
-        plt = build_graphic(student, course.get_average())
+        plt = build_graphic(student, course.get_average_each_week())
         save_graphic(plt, save_path, g_name+str(count))
         count += 1
 
