@@ -15,30 +15,35 @@ if __name__ == '__main__':
     
     semester_1 = Semester("Semester_1")
     
-    #course0 = DataLoader().load_from_file('../data/semester_1/logs_course_35.in',
-    #                                      '../data/semester_1/logs_course_35_professors.in' ,
-    #                                       'APE_I')
-    #course1 = DataLoader().load_from_file('../data/semester_1/logs_course_36.in',
-    #                                      '../data/semester_1/logs_course_36_professors.in',
-    #                                       'PEI_I')
-    #course2 = DataLoader().load_from_file('../data/semester_1/logs_course_37.in',
-    #                                      '../data/semester_1/logs_course_37_professors.in',
-    #                                       'EPP_I')
-    #course3 = DataLoader().load_from_file('../data/semester_1/logs_course_38.in',
-    #                                      '../data/semester_1/logs_course_38_professors.in',
-    #                                      'EC_I')
+    course0 = DataLoader().load_from_file('../data/semester_1/logs_course_35.in',
+                                          '../data/semester_1/logs_course_35_professors.in',
+                                          '../data/semester_1/exclude_course_35',
+                                           'APE_I')
+    course1 = DataLoader().load_from_file('../data/semester_1/logs_course_36.in',
+                                          '../data/semester_1/logs_course_36_professors.in',
+                                          '../data/semester_1/exclude_course_36',
+                                          'PEI_I')
+    course2 = DataLoader().load_from_file('../data/semester_1/logs_course_37.in',
+                                          '../data/semester_1/logs_course_37_professors.in',
+                                          '../data/semester_1/exclude_course_37',
+                                          'EPP_I')
+    course3 = DataLoader().load_from_file('../data/semester_1/logs_course_38.in',
+                                          '../data/semester_1/logs_course_38_professors.in',
+                                          '../data/semester_1/exclude_course_38',
+                                          'EC_I')
     course4 = DataLoader().load_from_file('../data/semester_1/logs_course_39.in',
                                           '../data/semester_1/logs_course_39_professors.in',
+                                          '../data/semester_1/exclude_course_39',
                                           'EAD_I')
     
-    #semester_1.courses[course0.name] = course0
-    #semester_1.courses[course1.name] = course1
-    #semester_1.courses[course2.name] = course2
-    #semester_1.courses[course3.name] = course3
+    semester_1.courses[course0.name] = course0
+    semester_1.courses[course1.name] = course1
+    semester_1.courses[course2.name] = course2
+    semester_1.courses[course3.name] = course3
     semester_1.courses[course4.name] = course4
-    
+
     #semester_1.normalize()
-    #semester_1.save("../data/semester_1/")    
+    semester_1.save("../data/semester_1/")    
     '''
     semester_2 = Semester("Semester_2")
     
@@ -67,5 +72,5 @@ if __name__ == '__main__':
     '''
     #semester_1.print_all_student_names()
     
-    #save_graphic_semester(semester_1, '../graphics/semester_1_rep/')
+    save_graphic_semester(semester_1, '../graphics/semester_1/')
     

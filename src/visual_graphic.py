@@ -39,7 +39,7 @@ def build_graphic(student, average=None):
 
         plt.xticks(ticks)
 
-        plt.ylabel('Number of Interactions')
+        plt.ylabel('Interaction Number')
         plt.xlabel('Week')
         plt.title(student.name + ' ' + student.last_name +
                   ' - Interaction Graphic')

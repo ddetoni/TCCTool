@@ -12,9 +12,18 @@ from src.utils import remove_white_space
 
 class DataLoader:
 
-    def load_from_file(self, student_file_path, professor_file_path, name_course):
+    def load_from_file(self, student_file_path, professor_file_path,
+                       exclude_file_path, name_course):
 
         print "\nStarting to load \'" + student_file_path + "\' file.\n"
+
+        exclude_data = open(exclude_file_path)
+        exclude_names = []
+
+        for line in exclude_data:
+            exclude_names.append(line[0:-1]) #The last two characteres are '\n'
+        
+        exclude_data.close()
 
         data_student = open(student_file_path)
         data_professor = open(professor_file_path)
@@ -45,6 +54,9 @@ class DataLoader:
             first_name = split_line[0]
             last_name = split_line[1]
             timestamp = split_line[2]
+
+            if complete_name in exclude_names:
+                continue
 
             conf_interaction = None
             if complete_name in course.professors:
@@ -82,10 +94,13 @@ class DataLoader:
             first_name = split_line[0]
             last_name = split_line[1]
             timestamp = split_line[2]
-            
+
+            if complete_name in exclude_names:
+                continue
+
             if self.is_professor(complete_name, course):
                 continue
-            
+
             conf_interaction = None
             if complete_name in course.students:
                 student = course.students.get(complete_name)
