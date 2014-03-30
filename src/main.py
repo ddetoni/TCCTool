@@ -44,6 +44,7 @@ if __name__ == '__main__':
 
     #semester_1.normalize()
     semester_1.save("../data/semester_1/")    
+    #semester_1.get_all_student_names()
     '''
     semester_2 = Semester("Semester_2")
     
@@ -72,5 +73,5 @@ if __name__ == '__main__':
     '''
     #semester_1.print_all_student_names()
     
-    save_graphic_semester(semester_1, '../graphics/semester_1/')
+    #save_graphic_semester(semester_1, '../graphics/semester_1/')
     

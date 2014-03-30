@@ -96,3 +96,17 @@ class Semester:
 
         for s_name in student_list:
             self.del_student(s_name)
+    
+    def get_all_student_names(self):
+        
+        student_names = []
+
+        for course in self.courses.itervalues():
+            for student in course.students.itervalues():
+                complete_name = student.name + ' ' + student.last_name
+                if complete_name not in student_names:
+                    student_names.append(complete_name)
+                    
+        return student_names
+
+        
