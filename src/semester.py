@@ -109,4 +109,14 @@ class Semester:
                     
         return student_names
 
+    def verify_approved(self, following_semester):
+
+        s_names = following_semester.get_all_student_names()
         
+        for course in self.courses.itervalues():
+            for student in course.students.itervalues():
+                complete_name = student.name + ' ' + student.last_name
+                if complete_name in s_names:
+                    student.result = 2
+                else:
+                    student.result = 1

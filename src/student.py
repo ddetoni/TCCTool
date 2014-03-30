@@ -9,6 +9,7 @@ class Student:
     name = None
     last_name = None
     interactions = None
+    result = 0
 
     def __init__(self, name, last_name):
         self.name = name

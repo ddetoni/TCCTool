@@ -7,7 +7,7 @@ import pickle
 from student import Student
 from professor import Professor
 from course import Course
-from src.utils import remove_white_space
+from utils import remove_white_space
 
 
 class DataLoader:
