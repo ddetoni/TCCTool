@@ -62,11 +62,14 @@ class Semester:
 
     def print_all_student_names(self):
 
-        student_names = list(self.normalize_students)
-        student_names.sort()
+        already_printed = []
 
-        for name in student_names:
-            print name
+        for course in self.courses.itervalues():
+            for student in course.students.itervalues():
+                complete_name = student.name + ' ' + student.last_name
+                if complete_name not in already_printed:
+                    already_printed.append(complete_name)
+                    print complete_name + ' - ' + str(student.result)
 
     def info(self):
 

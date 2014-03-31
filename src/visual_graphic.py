@@ -3,7 +3,7 @@ Created on 05/12/2013
 
 @author: douglas
 '''
-from src.utils import week_interaction
+from utils import week_interaction
 import matplotlib.pyplot as plt
 import os
 
@@ -38,11 +38,18 @@ def build_graphic(student, average=None):
             plt.plot(xAv, yAv, 'o-', None, True)
 
         plt.xticks(ticks)
+        
+        if student.result == 2:
+            result = "Approved"
+        elif student.result == 1:
+            result = "Disapproved"
+        else:
+            result = "No info"
 
         plt.ylabel('Interaction Number')
         plt.xlabel('Week')
         plt.title(student.name + ' ' + student.last_name +
-                  ' - Interaction Graphic')
+                  ' - ' + result)
 
         return plt
 

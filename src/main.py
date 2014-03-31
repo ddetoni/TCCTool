@@ -8,7 +8,7 @@ Created on 26/11/2013
 
 from dataloader import DataLoader
 from semester import Semester
-#from src.visual_graphic import save_graphic_semester
+from visual_graphic import save_graphic_semester
 #from src.utils import approved
 
 if __name__ == '__main__':
@@ -76,7 +76,5 @@ if __name__ == '__main__':
     semester_2.courses[course9.name] = course9
     
     semester_1.verify_approved(semester_2)
-    print 'teste'
-    
     #save_graphic_semester(semester_1, '../graphics/semester_1/')
-    
+    semester_1.print_all_student_names()
