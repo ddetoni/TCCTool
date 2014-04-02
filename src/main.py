@@ -8,11 +8,11 @@ Created on 26/11/2013
 
 from dataloader import DataLoader
 from semester import Semester
-from visual_graphic import save_graphic_semester
+#from visual_graphic import save_graphic_semester
 #from src.utils import approved
 
 if __name__ == '__main__':
-    
+    '''
     semester_1 = Semester("Semester_1")
     
     course0 = DataLoader().load_from_file('../data/semester_1/logs_course_35.in',
@@ -41,10 +41,6 @@ if __name__ == '__main__':
     semester_1.courses[course2.name] = course2
     semester_1.courses[course3.name] = course3
     semester_1.courses[course4.name] = course4
-
-    #semester_1.normalize()
-    #semester_1.save("../data/semester_1/")    
-
     
     semester_2 = Semester("Semester_2")
     
@@ -74,7 +70,21 @@ if __name__ == '__main__':
     semester_2.courses[course7.name] = course7
     semester_2.courses[course8.name] = course8
     semester_2.courses[course9.name] = course9
-    
+
     semester_1.verify_approved(semester_2)
+
+    semester_1.save("../data/semester_1/")
+    semester_2.save("../data/semester_2/")
+    
+    '''
+    semester_1 = Semester("Semester_1").load("../data/semester_1/Semester_1.srz")
+    semester_2 = Semester("Semester_2").load("../data/semester_2/Semester_2.srz")
+    
     #save_graphic_semester(semester_1, '../graphics/semester_1/')
-    semester_1.print_all_student_names()
+    #semester_1.print_all_student_names()
+    
+    semester_1.courses['EAD_I'].student_statistics()
+    semester_1.courses['EPP_I'].student_statistics()
+    semester_1.courses['APE_I'].student_statistics()
+    semester_1.courses['PEI_I'].student_statistics()
+    semester_1.courses['EC_I'].student_statistics()

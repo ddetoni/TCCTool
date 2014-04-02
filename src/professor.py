@@ -9,6 +9,7 @@ class Professor:
     name = None
     last_name = None
     interactions = None
+    total_interactions = 0
 
     def __init__(self, name, last_name):
         self.name = name
@@ -28,7 +29,9 @@ class Professor:
         if date in self.interactions:
             count_int = self.interactions[date]
             self.interactions[date] = count_int + 1
+            self.total_interactions = self.total_interactions + 1
             return count_int + 1
         else:
             self.interactions[date] = 1
+            self.total_interactions = self.total_interactions + 1
             return 1

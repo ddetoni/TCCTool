@@ -4,6 +4,7 @@ Created on 04/12/2013
 @author: douglas
 '''
 import datetime
+from math import sqrt
 
 
 class Course:
@@ -56,3 +57,45 @@ class Course:
             average[date] = interactions/total_students
 
         return average
+    
+    def student_statistics(self):
+        
+        total_students = len(self.students)
+        
+        all_interaction_numbers = []
+        count_interactions = 0
+        for student in self.students.itervalues():
+            count_interactions = count_interactions + student.total_interactions
+            all_interaction_numbers.append(student.total_interactions)
+        
+        average = count_interactions/total_students
+        
+        all_interaction_numbers.sort()
+        median1 = -1;
+        median2 = -1;
+        if total_students%2 == 0:
+            median1 = all_interaction_numbers[total_students/2]
+            median1 = all_interaction_numbers[(total_students/2)-1]
+        else:
+            median1 = all_interaction_numbers[total_students/2]
+        
+        difference_with_average = []
+        for number in all_interaction_numbers:
+            difference_with_average.append(average-number)
+        
+        count_square_sum = 0
+        for number in difference_with_average:
+            count_square_sum = count_square_sum + (number*number)
+
+        standard_deviation = sqrt(count_square_sum/total_students)
+        
+        print self.name + ' statistics:'
+        print 'Student average: ' + str(average)
+
+        if(median2 != -1):
+            print 'Median: ' + str(median1) + ' and ' + str(median2)
+        else:
+            print 'Median: ' + str(median1)
+            
+        print 'Standard deviation: +/-%.2f' % standard_deviation
+        print ''
