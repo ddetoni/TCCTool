@@ -80,11 +80,20 @@ if __name__ == '__main__':
     semester_1 = Semester("Semester_1").load("../data/semester_1/Semester_1.srz")
     semester_2 = Semester("Semester_2").load("../data/semester_2/Semester_2.srz")
     
-    save_graphic_semester(semester_1, '../graphics/semester_1/')
+    #save_graphic_semester(semester_1, '../graphics/semester_1/')
     #semester_1.print_all_student_names()
     
-    semester_1.courses['EAD_I'].student_statistics()
-    semester_1.courses['EPP_I'].student_statistics()
-    semester_1.courses['APE_I'].student_statistics()
-    semester_1.courses['PEI_I'].student_statistics()
-    semester_1.courses['EC_I'].student_statistics()
+    semester_1.courses['EAD_I'].general_statistics()
+    semester_1.courses['EAD_I'].week_statistics()
+    
+    semester_1.courses['EPP_I'].general_statistics()
+    semester_1.courses['EPP_I'].week_statistics()
+    
+    semester_1.courses['APE_I'].general_statistics()
+    semester_1.courses['APE_I'].week_statistics()
+    
+    semester_1.courses['PEI_I'].general_statistics()
+    semester_1.courses['PEI_I'].week_statistics()
+    
+    semester_1.courses['EC_I'].general_statistics()
+    semester_1.courses['EC_I'].week_statistics()
