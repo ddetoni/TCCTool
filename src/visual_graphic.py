@@ -6,14 +6,14 @@ Created on 05/12/2013
 from utils import week_interaction
 import matplotlib.pyplot as plt
 import os
+from student import Student
 
-
-def build_graphic(student, average=None):
+def build_graphic(person, average=None):
 
         #52 weeks -> year
         ticks = range(0, 53, 4)
 
-        week_interactions = week_interaction(student.interactions)
+        week_interactions = week_interaction(person.interactions)
 
         weeks = week_interactions.keys()
         weeks.sort()
@@ -39,27 +39,34 @@ def build_graphic(student, average=None):
 
         plt.xticks(ticks)
         
-        if student.result == 2:
-            result = "Approved"
-        elif student.result == 1:
-            result = "Disapproved"
-        else:
-            result = "No info"
+        if isinstance(person, Student):
+            if person.result == 2:
+                result = "Approved"
+            elif person.result == 1:
+                result = "Disapproved"
+            else:
+                result = "No info"
 
         plt.ylabel('Interaction Number')
         plt.xlabel('Week')
-        plt.title(student.name + ' ' + student.last_name +
-                  ' - ' + result)
+        
+        if isinstance(person, Student):
+            plt.title(person.name + ' ' + person.last_name +
+                      ' - ' + result)
+        else:
+            plt.title(person.name + ' ' + person.last_name)
 
         return plt
 
 
 def save_graphic_course(course, save_path):
 
-    if not os.path.exists(save_path):
-        os.mkdir(save_path)
+    os.mkdir(save_path)
+    os.mkdir(save_path + 'students/')
+    os.mkdir(save_path + 'professors/')
 
-    count = 0
+    count_students = 0
+    count_professors = 0
     g_name = 'graphic_'
 
     student_names = course.students.keys()
@@ -68,9 +75,13 @@ def save_graphic_course(course, save_path):
         student = course.students[name]
 
         plt = build_graphic(student, course.get_average_each_week())
-        save_graphic(plt, save_path, g_name+str(count))
-        count += 1
-
+        save_graphic(plt, save_path+'students/', g_name+str(count_students))
+        count_students += 1
+        
+    for professor in course.professors.itervalues():
+        plt = build_graphic(professor, course.get_average_each_week())
+        save_graphic(plt, save_path+'professors/', g_name+str(count_professors))
+        count_professors += 1
 
 def save_graphic_semester(semester, save_path):
 
