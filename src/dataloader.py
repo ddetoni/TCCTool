@@ -116,6 +116,9 @@ class DataLoader:
                 count_interaction += 1
 
         data_student.close()
+        
+        for student in course.students.itervalues():
+            student.set_average_by_week()
 
         print "\n"
         self.print_data_stats(count_interaction, course)

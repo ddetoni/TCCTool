@@ -12,7 +12,7 @@ from visual_graphic import save_graphic_semester
 #from src.utils import approved
 
 if __name__ == '__main__':
-    '''
+    
     semester_1 = Semester("Semester_1")
     
     course0 = DataLoader().load_from_file('../data/semester_1/students/logs_course_35.in',
@@ -76,13 +76,13 @@ if __name__ == '__main__':
     semester_1.save("../data/semester_1/")
     semester_2.save("../data/semester_2/")
     
-    '''
-    semester_1 = Semester("Semester_1").load("../data/semester_1/Semester_1.srz")
-    semester_2 = Semester("Semester_2").load("../data/semester_2/Semester_2.srz")
+    
+    #semester_1 = Semester("Semester_1").load("../data/semester_1/Semester_1.srz")
+    #semester_2 = Semester("Semester_2").load("../data/semester_2/Semester_2.srz")
     
     #save_graphic_semester(semester_1, '../graphics/semester_1/')
     #semester_1.print_all_student_names()
-    
+    '''
     semester_1.courses['EAD_I'].general_statistics()
     semester_1.courses['EAD_I'].week_statistics()
     
@@ -97,3 +97,4 @@ if __name__ == '__main__':
     
     semester_1.courses['EC_I'].general_statistics()
     semester_1.courses['EC_I'].week_statistics()
+    '''
