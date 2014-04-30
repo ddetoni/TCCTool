@@ -12,29 +12,32 @@ from utils import remove_white_space
 
 class DataLoader:
 
-    def load_from_file(self, student_file_path, professor_file_path,
-                       exclude_file_path, name_course):
+    def load_from_file(self, course_file_path, course_name, begin_date, end_date):
 
-        print "\nStarting to load \'" + student_file_path + "\' file.\n"
-
-        exclude_data = open(exclude_file_path)
-        exclude_names = []
-
-        for line in exclude_data:
-            exclude_names.append(line[0:-1]) #The last two characteres are '\n'
+        print "\nStarting to load \'" + course_file_path + "\' file.\n"
         
-        exclude_data.close()
+        students_file_path = course_file_path + "students.in"
+        professors_file_path = course_file_path + "professors.in"
+        ignore_file_path = course_file_path + "ignore"
+        
+        ignored_students_file = open(ignore_file_path)
+        ignored_names = []
 
-        data_student = open(student_file_path)
-        data_professor = open(professor_file_path)
+        for line in ignored_students_file:
+            ignored_names.append(line[0:-1]) #The last two characteres are '\n'
+        
+        ignored_students_file.close()
 
-        data_size = os.path.getsize(student_file_path) + os.path.getsize(professor_file_path)        
+        data_student = open(students_file_path)
+        data_professor = open(professors_file_path)
+
+        data_size = os.path.getsize(students_file_path) + os.path.getsize(professors_file_path)        
 
         # Put the carret at the right place
         data_processed = len(data_professor.readline()) + len(data_professor.readline())
         data_processed = data_processed + len(data_student.readline()) + len(data_student.readline())
 
-        course = Course(name_course)
+        course = Course(course_name)
         count_interaction = 0
         
         #Professor loader
@@ -55,9 +58,12 @@ class DataLoader:
             last_name = split_line[1]
             timestamp = split_line[2]
 
-            if complete_name in exclude_names:
+            if complete_name in ignored_names:
                 continue
-
+            
+            if not begin_date < int(timestamp) < end_date:
+                continue
+            
             conf_interaction = None
             if complete_name in course.professors:
                 professor = course.professors.get(complete_name)
@@ -95,7 +101,10 @@ class DataLoader:
             last_name = split_line[1]
             timestamp = split_line[2]
 
-            if complete_name in exclude_names:
+            if complete_name in ignored_names:
+                continue
+            
+            if not begin_date < int(timestamp) < end_date:
                 continue
 
             if self.is_professor(complete_name, course):

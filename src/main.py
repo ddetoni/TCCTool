@@ -8,80 +8,132 @@ Created on 26/11/2013
 
 from dataloader import DataLoader
 from semester import Semester
-from visual_graphic import save_graphic_semester
+from visual_graphic import save_graphic_semester, build_boxplot
 #from src.utils import approved
 
+def load_first_semester_clec():
+    semester = Semester("Semester_1")
+    begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
+    end_date = 1388455200     #Timestamp = 31/12/2013-00:00:00
+    
+    course0 = DataLoader().load_from_file('../data/CLEC/first_semester/APE-I/',
+                                           'APE_I',
+                                           begin_date, end_date)
+    
+    course1 = DataLoader().load_from_file('../data/CLEC/first_semester/EAD-I/',
+                                           'EAD_I',
+                                           begin_date, end_date)
+    
+    course2 = DataLoader().load_from_file('../data/CLEC/first_semester/EC-I/',
+                                           'EC_I',
+                                           begin_date, end_date)
+    
+    course3 = DataLoader().load_from_file('../data/CLEC/first_semester/EPP-I/',
+                                           'EPP_I',
+                                           begin_date, end_date)
+    
+    course4 = DataLoader().load_from_file('../data/CLEC/first_semester/PE-I/',
+                                           'PE_I',
+                                           begin_date, end_date)
+    
+    semester.courses[course0.name] = course0
+    semester.courses[course1.name] = course1
+    semester.courses[course2.name] = course2
+    semester.courses[course3.name] = course3
+    semester.courses[course4.name] = course4
+    
+    return semester
+
+def load_second_semester_clec():
+    semester = Semester("Semester_2")
+    begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
+    end_date = 1388455200     #Timestamp = 31/12/2013-00:00:00
+    
+    course0 = DataLoader().load_from_file('../data/CLEC/second_semester/APE-II/',
+                                           'APE_II',
+                                           begin_date, end_date)
+
+    course1 = DataLoader().load_from_file('../data/CLEC/second_semester/EAD-II/',
+                                           'EAD_II',
+                                           begin_date, end_date)
+
+    course2 = DataLoader().load_from_file('../data/CLEC/second_semester/EC-II/',
+                                           'EC_II',
+                                           begin_date, end_date)
+
+    course3 = DataLoader().load_from_file('../data/CLEC/second_semester/EPP-II/',
+                                           'EPP_II',
+                                           begin_date, end_date)
+    
+    course4 = DataLoader().load_from_file('../data/CLEC/second_semester/PE-II/',
+                                           'PE_II',
+                                           begin_date, end_date)
+    
+    semester.courses[course0.name] = course0
+    semester.courses[course1.name] = course1
+    semester.courses[course2.name] = course2
+    semester.courses[course3.name] = course3
+    semester.courses[course4.name] = course4
+    
+    return semester
+
+def load_third_semester_clec():
+    semester = Semester("Semester_3")
+    begin_date = 1388541600   #Timestamp = 01/01/2014-00:00:00
+    end_date = 1419991200     #Timestamp = 31/12/2014-00:00:00
+    
+    course0 = DataLoader().load_from_file('../data/CLEC/third_semester/APE-III/',
+                                           'APE_III',
+                                           begin_date, end_date)
+
+    course1 = DataLoader().load_from_file('../data/CLEC/third_semester/EC-III/',
+                                           'EC_III',
+                                           begin_date, end_date)
+
+    course2 = DataLoader().load_from_file('../data/CLEC/third_semester/ECo-I/',
+                                           'ECo_I',
+                                           begin_date, end_date)
+
+    course3 = DataLoader().load_from_file('../data/CLEC/third_semester/EPP-III/',
+                                           'EPP_III',
+                                           begin_date, end_date)
+    
+    course4 = DataLoader().load_from_file('../data/CLEC/third_semester/Lib-I/',
+                                           'Lib_I',
+                                           begin_date, end_date)
+    
+    course5 = DataLoader().load_from_file('../data/CLEC/third_semester/PE-III/',
+                                           'PE_III',
+                                           begin_date, end_date)
+    
+    semester.courses[course0.name] = course0
+    semester.courses[course1.name] = course1
+    semester.courses[course2.name] = course2
+    semester.courses[course3.name] = course3
+    semester.courses[course4.name] = course4
+    semester.courses[course5.name] = course5
+    
+    return semester
+
 if __name__ == '__main__':
-    
-    semester_1 = Semester("Semester_1")
-    
-    course0 = DataLoader().load_from_file('../data/semester_1/students/logs_course_35.in',
-                                          '../data/semester_1/professors/logs_course_35_professors.in',
-                                          '../data/semester_1/exclude_student_35',
-                                           'APE_I')
-    course1 = DataLoader().load_from_file('../data/semester_1/students/logs_course_36.in',
-                                          '../data/semester_1/professors/logs_course_36_professors.in',
-                                          '../data/semester_1/exclude_student_36',
-                                          'PEI_I')
-    course2 = DataLoader().load_from_file('../data/semester_1/students/logs_course_37.in',
-                                          '../data/semester_1/professors/logs_course_37_professors.in',
-                                          '../data/semester_1/exclude_student_37',
-                                          'EPP_I')
-    course3 = DataLoader().load_from_file('../data/semester_1/students/logs_course_38.in',
-                                          '../data/semester_1/professors/logs_course_38_professors.in',
-                                          '../data/semester_1/exclude_student_38',
-                                          'EC_I')
-    course4 = DataLoader().load_from_file('../data/semester_1/students/logs_course_39.in',
-                                          '../data/semester_1/professors/logs_course_39_professors.in',
-                                          '../data/semester_1/exclude_student_39',
-                                          'EAD_I')
-    
-    semester_1.courses[course0.name] = course0
-    semester_1.courses[course1.name] = course1
-    semester_1.courses[course2.name] = course2
-    semester_1.courses[course3.name] = course3
-    semester_1.courses[course4.name] = course4
-    
-    semester_2 = Semester("Semester_2")
-    
-    course5 = DataLoader().load_from_file('../data/semester_2/students/logs_course_61.in',
-                                          '../data/semester_2/professors/logs_course_61_professors.in',
-                                          '../data/semester_2/exclude_student_61',
-                                           'EAD_II')
-    course6 = DataLoader().load_from_file('../data/semester_2/students/logs_course_62.in',
-                                          '../data/semester_2/professors/logs_course_62_professors.in',
-                                          '../data/semester_2/exclude_student_62',
-                                          'EPP_II')
-    course7 = DataLoader().load_from_file('../data/semester_2/students/logs_course_63.in',
-                                          '../data/semester_2/professors/logs_course_63_professors.in',
-                                          '../data/semester_2/exclude_student_63',
-                                          'EC_II')
-    course8 = DataLoader().load_from_file('../data/semester_2/students/logs_course_64.in',
-                                          '../data/semester_2/professors/logs_course_64_professors.in',
-                                          '../data/semester_2/exclude_student_64',
-                                          'AP_II')
-    course9 = DataLoader().load_from_file('../data/semester_2/students/logs_course_65.in',
-                                          '../data/semester_2/professors/logs_course_65_professors.in',
-                                          '../data/semester_2/exclude_student_65',
-                                          'PE_II')
-    
-    semester_2.courses[course5.name] = course5
-    semester_2.courses[course6.name] = course6
-    semester_2.courses[course7.name] = course7
-    semester_2.courses[course8.name] = course8
-    semester_2.courses[course9.name] = course9
 
-    semester_1.verify_approved(semester_2)
+    #semester_1 = load_first_semester_clec()
+    semester_2 = load_second_semester_clec()
+    semester_3 = load_third_semester_clec()
 
-    semester_1.save("../data/semester_1/")
-    semester_2.save("../data/semester_2/")
-    
-    
+    semester_2.verify_approved(semester_3)
+
+    #semester_1.save("../data/semester_1/")
+    #semester_2.save("../data/semester_2/")
+
     #semester_1 = Semester("Semester_1").load("../data/semester_1/Semester_1.srz")
     #semester_2 = Semester("Semester_2").load("../data/semester_2/Semester_2.srz")
     
     #save_graphic_semester(semester_1, '../graphics/semester_1/')
-    #semester_1.print_all_student_names()
+    semester_2.print_all_student_names()
+
+    #build_boxplot(semester_1.courses['EAD_I'])
+    
     '''
     semester_1.courses['EAD_I'].general_statistics()
     semester_1.courses['EAD_I'].week_statistics()

@@ -5,6 +5,7 @@ Created on 05/12/2013
 '''
 from utils import week_interaction
 import matplotlib.pyplot as plt
+from pylab import *
 import os
 from student import Student
 
@@ -104,3 +105,18 @@ def save_graphic(plt, save_path, save_name):
     print 'Saving GRAPHIC: ' + final_path
     plt.savefig(final_path, format='png')
     plt.close()
+    
+def build_boxplot(course):
+    
+    student_total_interactions = [student.total_interactions for student in course.students.itervalues()]
+    student_week_average = [student.average_by_week for student in course.students.itervalues()]
+    
+    data = [student_total_interactions, student_week_average]
+    
+    
+    ax = plt.subplot()
+    ax.boxplot(student_total_interactions)
+    ax.set_title('Total de interacoes dos estudantes.')
+    ax.set_xlabel(course.name)
+    ax.set_ylabel('Interacoes')
+    plt.show()

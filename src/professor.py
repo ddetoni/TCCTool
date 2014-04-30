@@ -20,10 +20,6 @@ class Professor:
 
         date = datetime.datetime.fromtimestamp(float(timestamp))
 
-        #Interactions limited at 2013 year.
-        if date.year != 2013:
-            return None
-
         #Date formated
         date = date.strftime('%d/%m/%y')
         if date in self.interactions:

@@ -3,7 +3,10 @@
 *.in.srz
 *.png
 /data/
+/data_v1/
+/data_v2/
 /graphics/
+/graphics_v1/
 /.setting/
 .pyproject
 .pydevproject
