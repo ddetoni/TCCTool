@@ -13,3 +13,5 @@
 .gitignore~
 .project
 .settings/
+
+/graphics_v2

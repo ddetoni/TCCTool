@@ -88,13 +88,27 @@ def save_graphic_semester(semester, save_path):
 
     if not os.path.exists(save_path):
         os.mkdir(save_path)
-
+        
     course_names = semester.courses.keys()
 
     for c_name in course_names:
         save_graphic_course(semester.courses[c_name],
                             save_path + c_name + '/')
 
+def save_graphic_group(semester, course_name, group, save_path):
+    
+    if not os.path.exists(save_path):
+        os.mkdir(save_path)
+    
+    for individual in group:
+        full_name = individual.name + ' ' + individual.last_name
+        full_path = save_path + full_name + '/'
+        
+        if not os.path.exists(full_path):
+            os.mkdir(full_path)
+    
+        plt = build_graphic(individual, semester.courses[course_name].get_average_each_week())
+        save_graphic(plt, full_path, course_name)
 
 def show_graphic(plt):
     plt.show()

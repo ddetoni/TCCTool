@@ -152,3 +152,13 @@ class Course:
         print ''
         
         return [average, median1, median2, standard_deviation]
+
+    def get_all_reproved(self):
+        
+        reproved = []
+        
+        for student in self.students.itervalues():
+            if student.result == 1:
+                reproved.append(student)
+        
+        return reproved
