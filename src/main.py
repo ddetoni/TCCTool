@@ -11,30 +11,74 @@ from semester import Semester
 from visual_graphic import save_graphic_semester, build_boxplot
 #from src.utils import approved
 
+'''
 def load_first_semester_clec():
     semester = Semester("Semester_1")
-    begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
-    end_date = 1388455200     #Timestamp = 31/12/2013-00:00:00
+    #begin_date = 1362884400   #Timestamp = 10/03/2013-00:00:00
+    #end_date = 1373079600     #Timestamp = 06/07/2013-00:00:00
     
     course0 = DataLoader().load_from_file('../data/CLEC/first_semester/APE-I/',
                                            'APE_I',
-                                           begin_date, end_date)
+                                           1365908400, #14/04/2013
+                                           1369537140) #25/05/2013
     
     course1 = DataLoader().load_from_file('../data/CLEC/first_semester/EAD-I/',
                                            'EAD_I',
-                                           begin_date, end_date)
+                                           1362884400, #10/03/2013
+                                           1365822000) #13/04/2013
     
     course2 = DataLoader().load_from_file('../data/CLEC/first_semester/EC-I/',
                                            'EC_I',
-                                           begin_date, end_date)
+                                           1369537200, #26/05/2013
+                                           1373079600) #06/07/2013
     
     course3 = DataLoader().load_from_file('../data/CLEC/first_semester/EPP-I/',
                                            'EPP_I',
-                                           begin_date, end_date)
+                                           1369537200, #26/05/2013
+                                           1373079600) #06/07/2013
     
     course4 = DataLoader().load_from_file('../data/CLEC/first_semester/PE-I/',
                                            'PE_I',
-                                           begin_date, end_date)
+                                           1365908400, #14/04/2013
+                                           1369537140) #25/05/2013
+    
+    semester.courses[course0.name] = course0
+    semester.courses[course1.name] = course1
+    semester.courses[course2.name] = course2
+    semester.courses[course3.name] = course3
+    semester.courses[course4.name] = course4
+    
+    return semester
+'''
+def load_first_semester_clec():
+    semester = Semester("Semester_1")
+    begin_date = 1362884400   #Timestamp = 10/03/2013-00:00:00
+    end_date = 1373079600     #Timestamp = 06/07/2013-00:00:00
+    
+    course0 = DataLoader().load_from_file('../data/CLEC/first_semester/APE-I/',
+                                           'APE_I',
+                                           begin_date, 
+                                           end_date)
+    
+    course1 = DataLoader().load_from_file('../data/CLEC/first_semester/EAD-I/',
+                                           'EAD_I',
+                                           1362884400, #10/03/2013
+                                           1365822000) #13/04/2013
+    
+    course2 = DataLoader().load_from_file('../data/CLEC/first_semester/EC-I/',
+                                           'EC_I',
+                                           begin_date, 
+                                           end_date)
+    
+    course3 = DataLoader().load_from_file('../data/CLEC/first_semester/EPP-I/',
+                                           'EPP_I',
+                                           begin_date, 
+                                           end_date)
+    
+    course4 = DataLoader().load_from_file('../data/CLEC/first_semester/PE-I/',
+                                           'PE_I',
+                                           begin_date, 
+                                           end_date)
     
     semester.courses[course0.name] = course0
     semester.courses[course1.name] = course1
@@ -117,11 +161,11 @@ def load_third_semester_clec():
 
 if __name__ == '__main__':
 
-    #semester_1 = load_first_semester_clec()
-    semester_2 = load_second_semester_clec()
-    semester_3 = load_third_semester_clec()
+    semester_1 = load_first_semester_clec()
+    #semester_2 = load_second_semester_clec()
+    #semester_3 = load_third_semester_clec()
 
-    semester_2.verify_approved(semester_3)
+    #semester_1.verify_approved(semester_2)
 
     #semester_1.save("../data/semester_1/")
     #semester_2.save("../data/semester_2/")
@@ -130,7 +174,7 @@ if __name__ == '__main__':
     #semester_2 = Semester("Semester_2").load("../data/semester_2/Semester_2.srz")
     
     #save_graphic_semester(semester_1, '../graphics/semester_1/')
-    semester_2.print_all_student_names()
+    semester_1.print_all_student_names()
 
     #build_boxplot(semester_1.courses['EAD_I'])
     

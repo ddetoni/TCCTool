@@ -18,15 +18,9 @@ class DataLoader:
         
         students_file_path = course_file_path + "students.in"
         professors_file_path = course_file_path + "professors.in"
+        
         ignore_file_path = course_file_path + "ignore"
-        
-        ignored_students_file = open(ignore_file_path)
-        ignored_names = []
-
-        for line in ignored_students_file:
-            ignored_names.append(line[0:-1]) #The last two characteres are '\n'
-        
-        ignored_students_file.close()
+        ignored_names = self._get_ignored_names(ignore_file_path)
 
         data_student = open(students_file_path)
         data_professor = open(professors_file_path)
@@ -166,3 +160,16 @@ class DataLoader:
             return True
         else:
             return False
+    
+    def _get_ignored_names(self, ignore_file_path):
+        
+        ignored_students_file = open(ignore_file_path)
+        ignored_names = []
+
+        for line in ignored_students_file:
+            name = line[0:-1]
+            name = unicode(name, encoding="utf-8")
+            ignored_names.append(name) #The last two characteres are '\n'
+        
+        ignored_students_file.close()
+        return ignored_names
