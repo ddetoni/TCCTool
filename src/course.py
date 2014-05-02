@@ -12,6 +12,7 @@ class Course:
 
     students = None
     professors = None
+    tutors = None
     name = None
     total_interactions_each_week = None
 
@@ -19,6 +20,7 @@ class Course:
 
         self.students = {}
         self.professors = {}
+        self.tutors = {}
         self.name = name
         self.total_interactions_each_week = {}
 
