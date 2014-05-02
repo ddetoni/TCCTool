@@ -51,7 +51,6 @@ class DataLoader:
             if len(split_line) != 3:
                 continue
 
-            #Verify if student exist
             complete_name = split_line[0]+" "+split_line[1]
             first_name = split_line[0]
             last_name = split_line[1]
@@ -63,7 +62,6 @@ class DataLoader:
             if not begin_date < int(timestamp) < end_date:
                 continue
             
-            conf_interaction = None
             if complete_name in course.professors:
                 professor = course.professors.get(complete_name)
                 conf_interaction = professor.set_interation(timestamp)
@@ -124,7 +122,6 @@ class DataLoader:
             if len(split_line) != 3:
                 continue
 
-            #Verify if student exist
             complete_name = split_line[0]+" "+split_line[1]
             first_name = split_line[0]
             last_name = split_line[1]
@@ -138,18 +135,21 @@ class DataLoader:
 
             if self.is_professor(complete_name, course):
                 continue
+            
+            if self.is_tutor(complete_name, course):
+                continue
 
-            conf_interaction = None
+            confirm_interaction = None
             if complete_name in course.students:
                 student = course.students.get(complete_name)
-                conf_interaction = student.set_interation(timestamp)
+                confirm_interaction = student.set_interation(timestamp)
             else:
                 student = Student(first_name, last_name)
-                conf_interaction = student.set_interation(timestamp)
+                confirm_interaction = student.set_interation(timestamp)
                 course.students[complete_name] = student
 
             #Exclude the invalid dates
-            if conf_interaction is not None:
+            if confirm_interaction is not None:
                 course.add_to_week_average(timestamp, 1)
                 count_interaction += 1
 
@@ -194,6 +194,13 @@ class DataLoader:
     def is_professor(self, complete_name, course):
 
         if complete_name in course.professors:
+            return True
+        else:
+            return False
+        
+    def is_tutor(self, complete_name, course):
+
+        if complete_name in course.tutors:
             return True
         else:
             return False

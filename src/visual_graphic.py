@@ -102,6 +102,7 @@ def save_graphic_group(semester, course_name, group, save_path):
     
     for individual in group:
         full_name = individual.name + ' ' + individual.last_name
+        full_name = full_name.replace('/', '_')
         full_path = save_path + full_name + '/'
         
         if not os.path.exists(full_path):
@@ -134,3 +135,10 @@ def build_boxplot(course):
     ax.set_xlabel(course.name)
     ax.set_ylabel('Interacoes')
     plt.show()
+
+def save_graphics_reproveds(semester, save_path):
+    
+    for course_name, course in semester.courses.iteritems():
+        reproved_group = course.get_all_reproved()
+        save_graphic_group(semester, course_name, reproved_group, save_path)
+    
