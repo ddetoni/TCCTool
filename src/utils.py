@@ -90,3 +90,47 @@ def remove_white_space(file_line):
         line_without_space = line_without_space + next_c
 
     return line_without_space
+
+def generate_semester_csv(semester,class_name, num_weeks, save_path):
+    
+    file = open(save_path+semester.name+".csv", 'w')
+    
+    weeks = range(num_weeks)
+    weeks_string = ['S'+str(i) for i in weeks]
+    
+    header = 'NomeAluno,Situacao,Curso,Disciplina,Semestre,SomaInteracoes'
+    
+    for w in weeks_string:
+        header +=  ','+w
+    
+    header += '\n'
+    file.write(header)
+    
+    for course_name, course in semester.courses.iteritems():
+        for stu_name, student in course.students.iteritems():
+            line = stu_name
+            if student.result == 1:
+                line += ',reprovado'
+            elif student.result == 2:
+                line += ',aprovado'
+            
+            line += ','+class_name
+            
+            line += ','+course_name
+            
+            line += ','+semester.name
+            
+            line += ','+str(student.total_interactions)
+
+            week_interactions = week_interaction(student.interactions)
+            for week in weeks:
+                if week in week_interactions:
+                    line += ','+str(week_interactions[week])
+                else:
+                    line += ',0'
+            
+            line += '\n'
+            file.write(line.encode('utf8'))
+    
+    file.close()
+                    
