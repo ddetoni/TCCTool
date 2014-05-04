@@ -93,7 +93,7 @@ def remove_white_space(file_line):
 
 def generate_semester_csv(semester,class_name, num_weeks, save_path):
     
-    file = open(save_path+semester.name+".csv", 'w')
+    csv_file = open(save_path+semester.name+".csv", 'w')
     
     weeks = range(num_weeks)
     weeks_string = ['S'+str(i) for i in weeks]
@@ -104,7 +104,7 @@ def generate_semester_csv(semester,class_name, num_weeks, save_path):
         header +=  ','+w
     
     header += '\n'
-    file.write(header)
+    csv_file.write(header)
     
     for course_name, course in semester.courses.iteritems():
         for stu_name, student in course.students.iteritems():
@@ -130,7 +130,63 @@ def generate_semester_csv(semester,class_name, num_weeks, save_path):
                     line += ',0'
             
             line += '\n'
-            file.write(line.encode('utf8'))
+            csv_file.write(line.encode('utf8'))
     
-    file.close()
-                    
+    csv_file.close()
+
+def normalize_week_interactions(week_interactions, first_week):
+    
+    last_week = first_week + 6 #7 weeks in total
+    normalized_week_interactions = [0]*7
+    
+    for week, n_interactions in week_interactions.iteritems():
+        if first_week <= week <= last_week:
+            normalized_week_interactions[week - first_week] += n_interactions
+        elif week < first_week:
+            normalized_week_interactions[0] += n_interactions
+        elif week > last_week:
+            normalized_week_interactions[6] += n_interactions
+    
+    return normalized_week_interactions
+
+def generate_semester_csv_normalized(semester,class_name, first_weeks, save_path):
+    csv_file = open(save_path+semester.name+"_norm.csv", 'w')
+    
+    weeks = range(1,8)
+    weeks_string = ['S'+str(i) for i in weeks]
+    
+    header = 'NomeAluno,Situacao,Curso,Disciplina,Semestre,SomaInteracoes'
+    
+    for w in weeks_string:
+        header +=  ','+w
+    
+    header += '\n'
+    csv_file.write(header)
+    
+    for course_name, course in semester.courses.iteritems():
+        for stu_name, student in course.students.iteritems():
+            line = stu_name
+            if student.result == 1:
+                line += ',reprovado'
+            elif student.result == 2:
+                line += ',aprovado'
+            
+            line += ','+class_name
+            
+            line += ','+course_name
+            
+            line += ','+semester.name
+            
+            line += ','+str(student.total_interactions)
+            
+            week_interactions = week_interaction(student.interactions)
+            normalized_week_interactions = normalize_week_interactions(week_interactions, first_weeks[course_name])
+            
+            for num in normalized_week_interactions:
+                line += ','+str(num)
+            
+            line += '\n'
+            csv_file.write(line.encode('utf8'))
+    
+    csv_file.close()
+

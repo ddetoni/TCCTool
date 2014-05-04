@@ -9,7 +9,7 @@ Created on 26/11/2013
 from dataloader import DataLoader
 from semester import Semester
 from visual_graphic import save_graphic_semester, build_boxplot, save_graphic_group, save_graphics_reproveds
-from utils import generate_semester_csv
+from utils import generate_semester_csv, generate_semester_csv_normalized
 from hgext.highlight import generate_css
 '''
 def load_first_semester_clec():
@@ -302,6 +302,12 @@ if __name__ == '__main__':
     
     #generate_semester_csv(semester_2,'CLEC', 52, '../csv/')
     
+    #first_weeks_s1 = {'APE_I':15,'EAD_I':10,'EPP_I':21,'EC_I':21,'PE_I':15}
+    #generate_semester_csv_normalized(semester_1,'CLEC', first_weeks_s1, '../csv/')
+    
+    #first_weeks_s2 = {'APE_II':43,'EAD_II':32,'EPP_II':37,'EC_II':37,'PE_II':43}
+    #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
+    
     #-------------------------------------------------------------------------------------#
     
     #semester_1 = load_first_semester_clpd()
@@ -315,8 +321,8 @@ if __name__ == '__main__':
     #semester_2.save("../data/CLPD/second_semester/")
     #semester_3.save("../data/CLPD/third_semester/")
     
-    #semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
-    semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
+    semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
+    #semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLPD/third_semester/Semester_3.srz")
     
     #save_graphic_semester(semester_1, '../graphics/CLPD/semester_1/')
@@ -325,7 +331,10 @@ if __name__ == '__main__':
     #save_graphics_reproveds(semester_1, '../graphics/CLPD/semester_1/reproved/')
     #save_graphics_reproveds(semester_2, '../graphics/CLPD/semester_2/reproved/')
     
-    generate_semester_csv(semester_2,'CLPD', 52, '../csv/')
+    #generate_semester_csv(semester_2,'CLPD', 52, '../csv/')
+    
+    first_weeks_s1 = {'CESADE_I':16,'CESEI_I':19,'EAD-NB':2,'CESEB_I':12,'APE_I':6}
+    generate_semester_csv_normalized(semester_1,'CLPD', first_weeks_s1, '../csv/')
     
     #semester_1.print_all_student_names()
     #print '\n'
