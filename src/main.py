@@ -270,8 +270,12 @@ if __name__ == '__main__':
     #first_weeks_s2 = {'APE_II':43,'EAD_II':32,'EPP_II':37,'EC_II':37,'PE_II':43}
     #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
     
-    selected_weeks = [21,22,23]
-    dp.extract_data(semester_1.courses['EC_I'], selected_weeks, '../csv/corrigidos_clec_s1/')
+    selected_weeks_7 = {'APE_I':[15,16,17,18,19,20,21],
+                      'EAD_I':[10,11,12,13,14,15,16],
+                      'EPP_I':[21,22,23,24,25,26,27],
+                      'EC_I':[21,22,23,24,25,26,27],
+                      'PE_I':[15,16,17,18,19,20,21]}
+    dp.extract_semester_data(semester_1, selected_weeks_7, 7, '../csv/corrigidos_clec_s1/')
     
     #-------------------------------------------------------------------------------------#
     

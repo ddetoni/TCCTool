@@ -10,18 +10,15 @@ import csv
 from utils import week_interaction
 import math
 
-def extract_data(course, selected_weeks=None, save_path='../'):    
-    file_name = course.name + '.csv'
+def extract_semester_data(semester, course_weeks, num_weeks, save_path='../'):
+    file_name = semester.name + '.csv'
     file_path = save_path + file_name
     data_file = open(file_path, 'wb')
     csv_file = csv.writer(data_file, delimiter=',')
     
     info_header = ['NomeAluno', 'Situacao', 'Disciplina', 'TotalTutores']
     
-    if selected_weeks:
-        week_header = ['S'+str(i) for i in range(len(selected_weeks))]
-    else:
-        week_header = ['S'+str(i) for i in range(52)]
+    week_header = ['S'+str(i) for i in range(num_weeks)]
     
     stats_header = ['Media', 'MediaDif', 'ZeroSem', 'Mediana']
     
@@ -29,6 +26,15 @@ def extract_data(course, selected_weeks=None, save_path='../'):
     table = []
     table.append(header)
     
+    for name, course in semester.courses.iteritems():
+        course_table = _extract_course_data(course, course_weeks[name])
+        table.extend(course_table)
+    
+    csv_file.writerows(table)
+
+def _extract_course_data(course, selected_weeks):    
+    
+    course_table = []
     for s_name, student in course.students.iteritems():
         row = [
                s_name.encode('utf8'),
@@ -57,9 +63,9 @@ def extract_data(course, selected_weeks=None, save_path='../'):
         median_w = _median_week_row(n_week_row)
         row.append(median_w)
         
-        table.append(row)
+        course_table.append(row)
     
-    csv_file.writerows(table)
+    return course_table
 
 def _get_week_interaction(student):
     week_interactions = week_interaction(student.interactions)
