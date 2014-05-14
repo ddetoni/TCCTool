@@ -10,46 +10,8 @@ from dataloader import DataLoader
 from semester import Semester
 from visual_graphic import save_graphic_semester, build_boxplot, save_graphic_group, save_graphics_reproveds
 from utils import generate_semester_csv, generate_semester_csv_normalized
-from hgext.highlight import generate_css
-'''
-def load_first_semester_clec():
-    semester = Semester("Semester_1")
-    #begin_date = 1362884400   #Timestamp = 10/03/2013-00:00:00
-    #end_date = 1373079600     #Timestamp = 06/07/2013-00:00:00
-    
-    course0 = DataLoader().load_from_file('../data/CLEC/first_semester/APE-I/',
-                                           'APE_I',
-                                           1365908400, #14/04/2013
-                                           1369537140) #25/05/2013
-    
-    course1 = DataLoader().load_from_file('../data/CLEC/first_semester/EAD-I/',
-                                           'EAD_I',
-                                           1362884400, #10/03/2013
-                                           1365822000) #13/04/2013
-    
-    course2 = DataLoader().load_from_file('../data/CLEC/first_semester/EC-I/',
-                                           'EC_I',
-                                           1369537200, #26/05/2013
-                                           1373079600) #06/07/2013
-    
-    course3 = DataLoader().load_from_file('../data/CLEC/first_semester/EPP-I/',
-                                           'EPP_I',
-                                           1369537200, #26/05/2013
-                                           1373079600) #06/07/2013
-    
-    course4 = DataLoader().load_from_file('../data/CLEC/first_semester/PE-I/',
-                                           'PE_I',
-                                           1365908400, #14/04/2013
-                                           1369537140) #25/05/2013
-    
-    semester.courses[course0.name] = course0
-    semester.courses[course1.name] = course1
-    semester.courses[course2.name] = course2
-    semester.courses[course3.name] = course3
-    semester.courses[course4.name] = course4
-    
-    return semester
-'''
+import dataprocessor as dp
+
 def load_first_semester_clec():
     semester = Semester("Semester_1")
     begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
@@ -161,8 +123,8 @@ def load_third_semester_clec():
 
 def load_first_semester_clpd():
     semester = Semester("Semester_1")
-    begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
-    end_date = 1375326000    #Timestamp = 01/08/2013-00:00:00
+    begin_date = 1355104800   #Timestamp = 10/12/2012-00:00:00
+    end_date = 1388455200    #Timestamp = 31/12/2013-00:00:00
     
     course0 = DataLoader().load_from_file('../data/CLPD/first_semester/APE_I/',
                                            'APE_I',
@@ -171,8 +133,8 @@ def load_first_semester_clpd():
     
     course1 = DataLoader().load_from_file('../data/CLPD/first_semester/CESADE_I/',
                                            'CESADE_I',
-                                           begin_date, #10/03/2013
-                                           end_date) #13/04/2013
+                                           begin_date,
+                                           end_date)
     
     course2 = DataLoader().load_from_file('../data/CLPD/first_semester/CESEB_I/',
                                            'CESEB_I',
@@ -286,7 +248,7 @@ if __name__ == '__main__':
     #semester_2.save("../data/CLEC/second_semester/")
     #semester_3.save("../data/CLEC/third_semester/")
 
-    #semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
+    semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
     #semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLEC/third_semester/Semester_3.srz")
     
@@ -308,6 +270,9 @@ if __name__ == '__main__':
     #first_weeks_s2 = {'APE_II':43,'EAD_II':32,'EPP_II':37,'EC_II':37,'PE_II':43}
     #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
     
+    selected_weeks = [21,22,23]
+    dp.extract_data(semester_1.courses['EC_I'], selected_weeks, '../csv/corrigidos_clec_s1/')
+    
     #-------------------------------------------------------------------------------------#
     
     #semester_1 = load_first_semester_clpd()
@@ -321,9 +286,11 @@ if __name__ == '__main__':
     #semester_2.save("../data/CLPD/second_semester/")
     #semester_3.save("../data/CLPD/third_semester/")
     
-    semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
+    #semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
     #semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLPD/third_semester/Semester_3.srz")
+    
+    #semester_1.verify_approved(semester_2)
     
     #save_graphic_semester(semester_1, '../graphics/CLPD/semester_1/')
     #save_graphic_semester(semester_2, '../graphics/CLPD/semester_2/')
@@ -331,10 +298,13 @@ if __name__ == '__main__':
     #save_graphics_reproveds(semester_1, '../graphics/CLPD/semester_1/reproved/')
     #save_graphics_reproveds(semester_2, '../graphics/CLPD/semester_2/reproved/')
     
-    #generate_semester_csv(semester_2,'CLPD', 52, '../csv/')
+    #generate_semester_csv(semester_1,'CLPD', 52, '../csv/')
     
-    first_weeks_s1 = {'CESADE_I':16,'CESEI_I':19,'EAD-NB':2,'CESEB_I':12,'APE_I':6}
-    generate_semester_csv_normalized(semester_1,'CLPD', first_weeks_s1, '../csv/')
+    #first_weeks_s1 = {'CESADE_I':16,'CESEI_I':19,'EAD-NB':2,'CESEB_I':12,'APE_I':6}
+    #generate_semester_csv_normalized(semester_1,'CLPD', first_weeks_s1, '../csv/')
+    
+    #first_weeks_s1 = {'CESADE_II':30,'CESEI_II':34,'ECO_I':34,'CESEB_II':30,'APE_II':30}
+    #generate_semester_csv_normalized(semester_2,'CLPD', first_weeks_s1, '../csv/')
     
     #semester_1.print_all_student_names()
     #print '\n'

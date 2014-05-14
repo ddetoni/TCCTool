@@ -4,6 +4,8 @@ Created on 04/12/2013
 @author: douglas
 '''
 
+import time
+import datetime
 
 #This method apply an intersection between two semester
 #and return a list of approved students.
@@ -189,4 +191,16 @@ def generate_semester_csv_normalized(semester,class_name, first_weeks, save_path
             csv_file.write(line.encode('utf8'))
     
     csv_file.close()
+
+def convert_datekeys_to_timestampkeys(date_dict):
+    
+    date_keys = date_dict.keys()
+    new_dict = {}
+    
+    for date in date_keys:
+        timestamp = int(time.mktime(datetime.datetime.strptime(date, "%d/%m/%Y").timetuple()))
+        new_dict[timestamp] = date_dict[date]
+    
+    return new_dict
+    
 
