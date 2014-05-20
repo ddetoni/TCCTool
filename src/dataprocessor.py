@@ -30,7 +30,9 @@ def extract_semester_data(semester, course_weeks, num_weeks, save_path='../'):
     table.append(header)
 
     for name, course in semester.courses.iteritems():
-        course_table = _extract_course_data(course, course_weeks[name], num_weeks)
+        course_table = _extract_course_data(course,
+                                            course_weeks[name],
+                                            num_weeks)
         table.extend(course_table)
 
     csv_file.writerows(table)
@@ -161,7 +163,7 @@ def _effort_factor(course_table, index_first_week, num_weeks):
     student interactions in a week and divided by the total of students.
     '''
 
-    total = 0;
+    total = 0
     count = 0
     for week in range(num_weeks):
         for row in course_table:
