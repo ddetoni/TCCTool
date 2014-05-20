@@ -23,18 +23,20 @@ def extract_semester_data(semester, course_weeks, num_weeks, save_path='../'):
 
     stats_header = ['Media', 'MediaDif', 'ZeroSem', 'Mediana']
 
-    header = info_header + week_header + stats_header
+    week_ef_header = ['EF-S'+str(i) for i in range(num_weeks)]
+
+    header = info_header + week_header + stats_header + week_ef_header
     table = []
     table.append(header)
 
     for name, course in semester.courses.iteritems():
-        course_table = _extract_course_data(course, course_weeks[name])
+        course_table = _extract_course_data(course, course_weeks[name], num_weeks)
         table.extend(course_table)
 
     csv_file.writerows(table)
 
 
-def _extract_course_data(course, selected_weeks):
+def _extract_course_data(course, selected_weeks, num_weeks):
 
     course_table = []
     for s_name, student in course.students.iteritems():
@@ -66,6 +68,8 @@ def _extract_course_data(course, selected_weeks):
         row.append(median_w)
 
         course_table.append(row)
+
+    course_table = _effort_factor(course_table, 4, num_weeks)
 
     return course_table
 
@@ -149,3 +153,27 @@ def _median_week_row(week_row):
     mid_point = len(week_row)/2
 
     return week_row[mid_point]
+
+
+def _effort_factor(course_table, index_first_week, num_weeks):
+    '''
+    This fucntion calculate the Effor Factor, which is the sum of all
+    student interactions in a week and divided by the total of students.
+    '''
+
+    total = 0;
+    count = 0
+    for week in range(num_weeks):
+        for row in course_table:
+            total += row[index_first_week+week]
+            count += 1
+
+        mean = total/float(count)
+        for row in course_table:
+            e_factor = round(row[index_first_week+week]/float(mean), 2)
+            row.append(e_factor)
+
+        total = 0
+        count = 0
+
+    return course_table
