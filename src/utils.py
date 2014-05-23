@@ -7,8 +7,9 @@ Created on 04/12/2013
 import time
 import datetime
 
-#This method apply an intersection between two semester
-#and return a list of approved students.
+
+# This method apply an intersection between two semester
+# and return a list of approved students.
 def approved(semester1, semester2):
 
     approved = list(semester1.normalize_students.intersection(
@@ -16,7 +17,7 @@ def approved(semester1, semester2):
     return approved
 
 
-#This method return the disapproved students
+# This method return the disapproved students
 def dispproved(semester1, semester2):
 
     dispproved = list(semester1.normalize_students.difference(
@@ -44,7 +45,7 @@ def convert_day_week(date_interaction):
     return count_days/7
 
 
-#Calculate the interactions by week
+# Calculate the interactions by week
 def week_interaction(day_interactions):
 
     inter_days = day_interactions.keys()
@@ -63,8 +64,8 @@ def week_interaction(day_interactions):
     return week_interactions
 
 
-#Remove all the invalids white spaces from a line.
-#Return a string with the words separated by "| "
+# Remove all the invalids white spaces from a line.
+# Return a string with the words separated by "| "
 def remove_white_space(file_line):
 
     line_without_space = ""
@@ -78,7 +79,7 @@ def remove_white_space(file_line):
     for c in line:
         next_c = c
 
-        #Case test for the variable actual_c
+        # Case test for the variable actual_c
         if not actual_c.isspace():
             line_without_space = line_without_space + actual_c
         elif (previous_c.isalpha() or previous_c.isdigit()) and \
@@ -93,7 +94,8 @@ def remove_white_space(file_line):
 
     return line_without_space
 
-def generate_semester_csv(semester,class_name, num_weeks, save_path):
+
+def generate_semester_csv(semester, class_name, num_weeks, save_path):
 
     csv_file = open(save_path+semester.name+".csv", 'w')
 
@@ -103,7 +105,7 @@ def generate_semester_csv(semester,class_name, num_weeks, save_path):
     header = 'NomeAluno,Situacao,Curso,Disciplina,Semestre,SomaInteracoes'
 
     for w in weeks_string:
-        header +=  ','+w
+        header += ',' + w
 
     header += '\n'
     csv_file.write(header)
@@ -136,9 +138,10 @@ def generate_semester_csv(semester,class_name, num_weeks, save_path):
 
     csv_file.close()
 
+
 def normalize_week_interactions(week_interactions, first_week):
 
-    last_week = first_week + 6 #7 weeks in total
+    last_week = first_week + 6  # 7 weeks in total
     normalized_week_interactions = [0]*7
 
     for week, n_interactions in week_interactions.iteritems():
@@ -151,16 +154,19 @@ def normalize_week_interactions(week_interactions, first_week):
 
     return normalized_week_interactions
 
-def generate_semester_csv_normalized(semester,class_name, first_weeks, save_path):
+
+def generate_semester_csv_normalized(semester, class_name,
+                                     first_weeks, save_path):
+
     csv_file = open(save_path+semester.name+"_norm.csv", 'w')
 
-    weeks = range(1,8)
+    weeks = range(1, 8)
     weeks_string = ['S'+str(i) for i in weeks]
 
     header = 'NomeAluno,Situacao,Curso,Disciplina,Semestre,SomaInteracoes'
 
     for w in weeks_string:
-        header +=  ','+w
+        header += ',' + w
 
     header += '\n'
     csv_file.write(header)
@@ -182,7 +188,9 @@ def generate_semester_csv_normalized(semester,class_name, first_weeks, save_path
             line += ','+str(student.total_interactions)
 
             week_interactions = week_interaction(student.interactions)
-            normalized_week_interactions = normalize_week_interactions(week_interactions, first_weeks[course_name])
+            normalized_week_interactions = normalize_week_interactions(
+                week_interactions,
+                first_weeks[course_name])
 
             for num in normalized_week_interactions:
                 line += ','+str(num)
@@ -192,13 +200,15 @@ def generate_semester_csv_normalized(semester,class_name, first_weeks, save_path
 
     csv_file.close()
 
+
 def convert_datekeys_to_timestampkeys(date_dict):
 
     date_keys = date_dict.keys()
     new_dict = {}
 
     for date in date_keys:
-        timestamp = int(time.mktime(datetime.datetime.strptime(date, "%d/%m/%Y").timetuple()))
+        timestamp = int(time.mktime(
+            datetime.datetime.strptime(date, "%d/%m/%Y").timetuple()))
         new_dict[timestamp] = date_dict[date]
 
     return new_dict
@@ -220,8 +230,9 @@ def select_weeks(semester):
         highest_sum = 0
         total = 0
         for i in range(53-7):
-            total = sum_weeks[i]+sum_weeks[i+1]+sum_weeks[i+2]+ \
-                    sum_weeks[i+3]+sum_weeks[i+4]+sum_weeks[i+5]+sum_weeks[i+6]
+            total = sum_weeks[i] + sum_weeks[i+1] + sum_weeks[i+2] + \
+                sum_weeks[i+3] + sum_weeks[i+4] + sum_weeks[i+5] + \
+                sum_weeks[i+6]
 
             if total > highest_sum:
                 highest_sum = total

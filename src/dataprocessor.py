@@ -11,13 +11,15 @@ from utils import week_interaction
 import math
 
 
-def extract_semester_data(semester, course_weeks, num_weeks, name, save_path='../'):
+def extract_semester_data(semester, course_weeks,
+                          num_weeks, name, save_path='../'):
     file_name = name + '.csv'
     file_path = save_path + file_name
     data_file = open(file_path, 'wb')
     csv_file = csv.writer(data_file, delimiter=',')
 
-    info_header = ['NomeAluno', 'Situacao', 'Disciplina', 'TotalProf', 'TotalTutores']
+    info_header = ['NomeAluno', 'Situacao', 'Disciplina',
+                   'TotalProf', 'TotalTutores']
 
     week_header = ['S'+str(i) for i in range(num_weeks)]
 
