@@ -94,20 +94,20 @@ def remove_white_space(file_line):
     return line_without_space
 
 def generate_semester_csv(semester,class_name, num_weeks, save_path):
-    
+
     csv_file = open(save_path+semester.name+".csv", 'w')
-    
+
     weeks = range(num_weeks)
     weeks_string = ['S'+str(i) for i in weeks]
-    
+
     header = 'NomeAluno,Situacao,Curso,Disciplina,Semestre,SomaInteracoes'
-    
+
     for w in weeks_string:
         header +=  ','+w
-    
+
     header += '\n'
     csv_file.write(header)
-    
+
     for course_name, course in semester.courses.iteritems():
         for stu_name, student in course.students.iteritems():
             line = stu_name
@@ -115,13 +115,13 @@ def generate_semester_csv(semester,class_name, num_weeks, save_path):
                 line += ',reprovado'
             elif student.result == 2:
                 line += ',aprovado'
-            
+
             line += ','+class_name
-            
+
             line += ','+course_name
-            
+
             line += ','+semester.name
-            
+
             line += ','+str(student.total_interactions)
 
             week_interactions = week_interaction(student.interactions)
@@ -130,17 +130,17 @@ def generate_semester_csv(semester,class_name, num_weeks, save_path):
                     line += ','+str(week_interactions[week])
                 else:
                     line += ',0'
-            
+
             line += '\n'
             csv_file.write(line.encode('utf8'))
-    
+
     csv_file.close()
 
 def normalize_week_interactions(week_interactions, first_week):
-    
+
     last_week = first_week + 6 #7 weeks in total
     normalized_week_interactions = [0]*7
-    
+
     for week, n_interactions in week_interactions.iteritems():
         if first_week <= week <= last_week:
             normalized_week_interactions[week - first_week] += n_interactions
@@ -148,23 +148,23 @@ def normalize_week_interactions(week_interactions, first_week):
             normalized_week_interactions[0] += n_interactions
         elif week > last_week:
             normalized_week_interactions[6] += n_interactions
-    
+
     return normalized_week_interactions
 
 def generate_semester_csv_normalized(semester,class_name, first_weeks, save_path):
     csv_file = open(save_path+semester.name+"_norm.csv", 'w')
-    
+
     weeks = range(1,8)
     weeks_string = ['S'+str(i) for i in weeks]
-    
+
     header = 'NomeAluno,Situacao,Curso,Disciplina,Semestre,SomaInteracoes'
-    
+
     for w in weeks_string:
         header +=  ','+w
-    
+
     header += '\n'
     csv_file.write(header)
-    
+
     for course_name, course in semester.courses.iteritems():
         for stu_name, student in course.students.iteritems():
             line = stu_name
@@ -172,35 +172,63 @@ def generate_semester_csv_normalized(semester,class_name, first_weeks, save_path
                 line += ',reprovado'
             elif student.result == 2:
                 line += ',aprovado'
-            
+
             line += ','+class_name
-            
+
             line += ','+course_name
-            
+
             line += ','+semester.name
-            
+
             line += ','+str(student.total_interactions)
-            
+
             week_interactions = week_interaction(student.interactions)
             normalized_week_interactions = normalize_week_interactions(week_interactions, first_weeks[course_name])
-            
+
             for num in normalized_week_interactions:
                 line += ','+str(num)
-            
+
             line += '\n'
             csv_file.write(line.encode('utf8'))
-    
+
     csv_file.close()
 
 def convert_datekeys_to_timestampkeys(date_dict):
-    
+
     date_keys = date_dict.keys()
     new_dict = {}
-    
+
     for date in date_keys:
         timestamp = int(time.mktime(datetime.datetime.strptime(date, "%d/%m/%Y").timetuple()))
         new_dict[timestamp] = date_dict[date]
-    
-    return new_dict
-    
 
+    return new_dict
+
+
+def select_weeks(semester):
+
+    selected_weeks = {}
+    for name, course in semester.courses.iteritems():
+
+        sum_weeks = [0]*53
+        for s_name, student in course.students.iteritems():
+
+            week_interactions = week_interaction(student.interactions)
+            for i_week, value in week_interactions.iteritems():
+                sum_weeks[i_week] += 1
+
+        best_first_week = 0
+        highest_sum = 0
+        total = 0
+        for i in range(53-7):
+            total = sum_weeks[i]+sum_weeks[i+1]+sum_weeks[i+2]+ \
+                    sum_weeks[i+3]+sum_weeks[i+4]+sum_weeks[i+5]+sum_weeks[i+6]
+
+            if total > highest_sum:
+                highest_sum = total
+                best_first_week = i
+
+            total = 0
+
+        selected_weeks[name] = range(best_first_week, best_first_week+7)
+
+    return selected_weeks

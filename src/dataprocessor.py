@@ -11,13 +11,13 @@ from utils import week_interaction
 import math
 
 
-def extract_semester_data(semester, course_weeks, num_weeks, save_path='../'):
-    file_name = semester.name + '.csv'
+def extract_semester_data(semester, course_weeks, num_weeks, name, save_path='../'):
+    file_name = name + '.csv'
     file_path = save_path + file_name
     data_file = open(file_path, 'wb')
     csv_file = csv.writer(data_file, delimiter=',')
 
-    info_header = ['NomeAluno', 'Situacao', 'Disciplina', 'TotalTutores']
+    info_header = ['NomeAluno', 'Situacao', 'Disciplina', 'TotalProf', 'TotalTutores']
 
     week_header = ['S'+str(i) for i in range(num_weeks)]
 
@@ -30,12 +30,15 @@ def extract_semester_data(semester, course_weeks, num_weeks, save_path='../'):
     table.append(header)
 
     for name, course in semester.courses.iteritems():
+
         course_table = _extract_course_data(course,
                                             course_weeks[name],
                                             num_weeks)
+
         table.extend(course_table)
 
     csv_file.writerows(table)
+    data_file.close()
 
 
 def _extract_course_data(course, selected_weeks, num_weeks):
@@ -46,6 +49,7 @@ def _extract_course_data(course, selected_weeks, num_weeks):
             s_name.encode('utf8'),
             'aprovado' if student.result == 2 else 'reprovado',
             course.name,
+            len(course.professors),
             len(course.tutors)
             ]
 
@@ -71,7 +75,7 @@ def _extract_course_data(course, selected_weeks, num_weeks):
 
         course_table.append(row)
 
-    course_table = _effort_factor(course_table, 4, num_weeks)
+    course_table = _effort_factor(course_table, 5, num_weeks)
 
     return course_table
 

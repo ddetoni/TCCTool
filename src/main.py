@@ -9,13 +9,13 @@ Created on 26/11/2013
 from dataloader import DataLoader
 from semester import Semester
 from visual_graphic import save_graphic_semester, build_boxplot, save_graphic_group, save_graphics_reproveds
-from utils import generate_semester_csv, generate_semester_csv_normalized
+from utils import generate_semester_csv, generate_semester_csv_normalized, select_weeks
 import dataprocessor as dp
 
 def load_first_semester_clec():
     semester = Semester("Semester_1")
     begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
-    end_date = 1375326000    #Timestamp = 01/08/2013-00:00:00
+    end_date = 1388541599    #Timestamp = 31/12/2013-23:59:59
 
     course0 = DataLoader().load_from_file('../data/CLEC/first_semester/APE-I/',
                                            'APE_I',
@@ -24,8 +24,8 @@ def load_first_semester_clec():
 
     course1 = DataLoader().load_from_file('../data/CLEC/first_semester/EAD-I/',
                                            'EAD_I',
-                                           begin_date, #10/03/2013
-                                           end_date) #13/04/2013
+                                           begin_date,
+                                           end_date)
 
     course2 = DataLoader().load_from_file('../data/CLEC/first_semester/EC-I/',
                                            'EC_I',
@@ -52,8 +52,8 @@ def load_first_semester_clec():
 
 def load_second_semester_clec():
     semester = Semester("Semester_2")
-    begin_date = 1375326000   #Timestamp = 01/08/2013-00:00:00
-    end_date = 1388455200     #Timestamo = 31/12/2013
+    begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
+    end_date = 1388541599     #Timestamp = 31/12/2013-23:59:59
 
     course0 = DataLoader().load_from_file('../data/CLEC/second_semester/APE-II/',
                                            'APE_II',
@@ -123,8 +123,10 @@ def load_third_semester_clec():
 
 def load_first_semester_clpd():
     semester = Semester("Semester_1")
-    begin_date = 1355104800   #Timestamp = 10/12/2012-00:00:00
-    end_date = 1388455200    #Timestamp = 31/12/2013-00:00:00
+    #begin_date = 1355104800   #Timestamp = 10/12/2012-00:00:00
+    #end_date = 1388455200    #Timestamp = 31/12/2013-00:00:00
+    begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
+    end_date = 1388541599     #Timestamp = 31/12/2013-23:59:59
 
     course0 = DataLoader().load_from_file('../data/CLPD/first_semester/APE_I/',
                                            'APE_I',
@@ -161,8 +163,8 @@ def load_first_semester_clpd():
 
 def load_second_semester_clpd():
     semester = Semester("Semester_2")
-    begin_date = 1375326000   #Timestamp = 01/08/2013-00:00:00
-    end_date = 1388455200     #Timestamp = 31/12/2013-00:00:00
+    begin_date = 1357005600   #Timestamp = 01/01/2013-00:00:00
+    end_date = 1388541599     #Timestamp = 31/12/2013-23:59:59
 
     course0 = DataLoader().load_from_file('../data/CLPD/second_semester/APE_II/',
                                            'APE_II',
@@ -249,7 +251,7 @@ if __name__ == '__main__':
     #semester_3.save("../data/CLEC/third_semester/")
 
     semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
-    #semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
+    semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLEC/third_semester/Semester_3.srz")
 
     #save_graphic_semester(semester_1, '../graphics/CLEC/semester_1/')
@@ -270,19 +272,11 @@ if __name__ == '__main__':
     #first_weeks_s2 = {'APE_II':43,'EAD_II':32,'EPP_II':37,'EC_II':37,'PE_II':43}
     #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
 
-    selected_weeks_7 = {'APE_I':[15,16,17,18,19,20,21],
-                      'EAD_I':[10,11,12,13,14,15,16],
-                      'EPP_I':[21,22,23,24,25,26,27],
-                      'EC_I':[21,22,23,24,25,26,27],
-                      'PE_I':[15,16,17,18,19,20,21]}
+    selected_weeks = select_weeks(semester_1)
+    dp.extract_semester_data(semester_1, selected_weeks, 7, 'clec_s1', '../csv/selecionado_normalizado/')
 
-    selected_weeks_3 = {'APE_I':[15,16,17],
-                      'EAD_I':[10,11,12],
-                      'EPP_I':[21,22,23],
-                      'EC_I':[21,22,23],
-                      'PE_I':[15,16,17]}
-
-    dp.extract_semester_data(semester_1, selected_weeks_7, 7, '../csv/corrigidos_clec_s1/')
+    selected_weeks = select_weeks(semester_2)
+    dp.extract_semester_data(semester_2, selected_weeks, 7, 'clec_s2', '../csv/selecionado_normalizado/')
 
     #-------------------------------------------------------------------------------------#
 
@@ -297,11 +291,9 @@ if __name__ == '__main__':
     #semester_2.save("../data/CLPD/second_semester/")
     #semester_3.save("../data/CLPD/third_semester/")
 
-    #semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
-    #semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
+    semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
+    semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLPD/third_semester/Semester_3.srz")
-
-    #semester_1.verify_approved(semester_2)
 
     #save_graphic_semester(semester_1, '../graphics/CLPD/semester_1/')
     #save_graphic_semester(semester_2, '../graphics/CLPD/semester_2/')
@@ -319,55 +311,12 @@ if __name__ == '__main__':
 
     #semester_1.print_all_student_names()
     #print '\n'
-    #semester_2.print_all_student_names()
-    '''
-    reproved_group = semester_1.courses['EAD_I'].get_all_reproved()
-    save_graphic_group(semester_1, 'EAD_I', reproved_group, '../graphics/semester_1/reproved/')
-
-    reproved_group = semester_1.courses['EPP_I'].get_all_reproved()
-    save_graphic_group(semester_1, 'EPP_I', reproved_group, '../graphics/semester_1/reproved/')
-
-    reproved_group = semester_1.courses['APE_I'].get_all_reproved()
-    save_graphic_group(semester_1, 'APE_I', reproved_group, '../graphics/semester_1/reproved/')
-
-    reproved_group = semester_1.courses['PE_I'].get_all_reproved()
-    save_graphic_group(semester_1, 'PE_I', reproved_group, '../graphics/semester_1/reproved/')
-
-    reproved_group = semester_1.courses['EC_I'].get_all_reproved()
-    save_graphic_group(semester_1, 'EC_I', reproved_group, '../graphics/semester_1/reproved/')
-    '''
-    '''
-    reproved_group = semester_2.courses['EAD_II'].get_all_reproved()
-    save_graphic_group(semester_2, 'EAD_II', reproved_group, '../graphics/semester_2/reproved/')
-
-    reproved_group = semester_2.courses['EPP_II'].get_all_reproved()
-    save_graphic_group(semester_2, 'EPP_II', reproved_group, '../graphics/semester_2/reproved/')
-
-    reproved_group = semester_2.courses['APE_II'].get_all_reproved()
-    save_graphic_group(semester_2, 'APE_II', reproved_group, '../graphics/semester_2/reproved/')
-
-    reproved_group = semester_2.courses['PE_II'].get_all_reproved()
-    save_graphic_group(semester_2, 'PE_II', reproved_group, '../graphics/semester_2/reproved/')
-
-    reproved_group = semester_2.courses['EC_II'].get_all_reproved()
-    save_graphic_group(semester_2, 'EC_II', reproved_group, '../graphics/semester_2/reproved/')
-    '''
+    #semester_2.print_all_student_names(
 
     #build_boxplot(semester_1.courses['EAD_I'])
 
-    '''
-    semester_1.courses['EAD_I'].general_statistics()
-    semester_1.courses['EAD_I'].week_statistics()
+    selected_weeks = select_weeks(semester_1)
+    dp.extract_semester_data(semester_1, selected_weeks, 7, 'clpd_s1', '../csv/selecionado_normalizado/')
 
-    semester_1.courses['EPP_I'].general_statistics()
-    semester_1.courses['EPP_I'].week_statistics()
-
-    semester_1.courses['APE_I'].general_statistics()
-    semester_1.courses['APE_I'].week_statistics()
-
-    semester_1.courses['PEI_I'].general_statistics()
-    semester_1.courses['PEI_I'].week_statistics()
-
-    semester_1.courses['EC_I'].general_statistics()
-    semester_1.courses['EC_I'].week_statistics()
-    '''
+    selected_weeks = select_weeks(semester_2)
+    dp.extract_semester_data(semester_2, selected_weeks, 7, 'clpd_s2', '../csv/selecionado_normalizado/')
