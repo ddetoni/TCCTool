@@ -251,7 +251,7 @@ if __name__ == '__main__':
     #semester_3.save("../data/CLEC/third_semester/")
 
     semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
-    semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
+    #semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLEC/third_semester/Semester_3.srz")
 
     #save_graphic_semester(semester_1, '../graphics/CLEC/semester_1/')
@@ -273,10 +273,10 @@ if __name__ == '__main__':
     #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
 
     selected_weeks = select_weeks(semester_1)
-    dp.extract_semester_data(semester_1, selected_weeks, 7, 'clec_s1', '../csv/selecionado_normalizado/')
+    dp.extract_semester_data(semester_1, selected_weeks, 3, 'clec_s1', '../csv/teste_num_weeks/')
 
-    selected_weeks = select_weeks(semester_2)
-    dp.extract_semester_data(semester_2, selected_weeks, 7, 'clec_s2', '../csv/selecionado_normalizado/')
+    #selected_weeks = select_weeks(semester_2)
+    #dp.extract_semester_data(semester_2, selected_weeks, 7, 'clec_s2', '../csv/selecionado_normalizado/')
 
     #-------------------------------------------------------------------------------------#
 
@@ -291,8 +291,8 @@ if __name__ == '__main__':
     #semester_2.save("../data/CLPD/second_semester/")
     #semester_3.save("../data/CLPD/third_semester/")
 
-    semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
-    semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
+    #semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
+    #semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLPD/third_semester/Semester_3.srz")
 
     #save_graphic_semester(semester_1, '../graphics/CLPD/semester_1/')
@@ -315,8 +315,8 @@ if __name__ == '__main__':
 
     #build_boxplot(semester_1.courses['EAD_I'])
 
-    selected_weeks = select_weeks(semester_1)
-    dp.extract_semester_data(semester_1, selected_weeks, 7, 'clpd_s1', '../csv/selecionado_normalizado/')
+    #selected_weeks = select_weeks(semester_1)
+    #dp.extract_semester_data(semester_1, selected_weeks, 7, 'clpd_s1', '../csv/selecionado_normalizado/')
 
-    selected_weeks = select_weeks(semester_2)
-    dp.extract_semester_data(semester_2, selected_weeks, 7, 'clpd_s2', '../csv/selecionado_normalizado/')
+    #selected_weeks = select_weeks(semester_2)
+    #dp.extract_semester_data(semester_2, selected_weeks, 7, 'clpd_s2', '../csv/selecionado_normalizado/')

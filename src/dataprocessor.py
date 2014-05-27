@@ -58,7 +58,7 @@ def _extract_course_data(course, selected_weeks, num_weeks):
         week_row = _get_week_interaction(student)
 
         if selected_weeks:
-            n_week_row = _normalize_weeks(week_row, selected_weeks)
+            n_week_row = _normalize_weeks(week_row, selected_weeks, num_weeks)
             row.extend(n_week_row)
         else:
             row.extend(week_row)
@@ -95,12 +95,17 @@ def _get_week_interaction(student):
     return week_row
 
 
-def _normalize_weeks(week_row, selected_weeks):
+def _normalize_weeks(week_row, selected_weeks, num_weeks):
 
+    count = 0
     normalized_week_row = []
     for i in range(len(week_row)):
         if i in selected_weeks:
             normalized_week_row.append(week_row[i])
+            count += 1
+
+        if count == num_weeks:
+            break
 
     return normalized_week_row
 
