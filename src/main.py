@@ -273,7 +273,7 @@ if __name__ == '__main__':
     #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
 
     selected_weeks = select_weeks(semester_1)
-    dp.extract_semester_data(semester_1, selected_weeks, 3, 'clec_s1', '../csv/teste_num_weeks/')
+    dp.extract_semester_data(semester_1, selected_weeks, 7, 'clec_s1', '-c', '../csv/completa/')
 
     #selected_weeks = select_weeks(semester_2)
     #dp.extract_semester_data(semester_2, selected_weeks, 7, 'clec_s2', '../csv/selecionado_normalizado/')
