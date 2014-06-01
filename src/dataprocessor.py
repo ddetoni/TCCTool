@@ -22,7 +22,8 @@ def extract_semester_data(semester, course_weeks,
 
     week_header = ['S'+str(i) for i in range(1, num_weeks+1)]
 
-    stats_header = ['Media', 'MediaDif', 'ZeroSem', 'Mediana']
+    stats_header = ['Media', 'MediaDif', 'ZeroSem', 'Mediana', 'RazaoProf',
+                    'RazaoTut']
 
     week_ef_header = ['EF-S'+str(i) for i in range(1, num_weeks+1)]
 
@@ -45,6 +46,10 @@ def extract_semester_data(semester, course_weeks,
 def _extract_course_data(course, selected_weeks, num_weeks):
 
     course_table = []
+
+    total_prof_interactions = _total_educator_interactions(course.professors, selected_weeks, num_weeks)
+    total_tut_interactions = _total_educator_interactions(course.tutors, selected_weeks, num_weeks)
+
     for s_name, student in course.students.iteritems():
         row = [
             s_name.encode('utf8'),
@@ -56,7 +61,8 @@ def _extract_course_data(course, selected_weeks, num_weeks):
 
         n_week_row = _normalize_weeks(week_row,
                                       selected_weeks,
-                                      num_weeks)
+                                      num_weeks,
+                                      0)
 
         row.extend(n_week_row)
 
@@ -71,6 +77,12 @@ def _extract_course_data(course, selected_weeks, num_weeks):
 
         median_w = _median_week_row(n_week_row)
         row.append(median_w)
+
+        ratio_professor = _ratio_educator(total_prof_interactions, n_week_row)
+        row.append(ratio_professor)
+
+        ratio_tutor = _ratio_educator(total_tut_interactions, n_week_row)
+        row.append(ratio_tutor)
 
         course_table.append(row)
 
@@ -92,7 +104,7 @@ def _get_week_interaction(student):
     return week_row
 
 
-def _normalize_weeks(week_row, selected_weeks, num_weeks):
+def _normalize_weeks(week_row, selected_weeks, num_weeks, educator_flag):
 
     count = 0
     index_first_week = 0
@@ -100,6 +112,7 @@ def _normalize_weeks(week_row, selected_weeks, num_weeks):
     for i in range(len(week_row)):
         if i in selected_weeks:
             normalized_week_row.append(week_row[i])
+
             if count == 0:
                 index_first_week = i
 
@@ -108,11 +121,12 @@ def _normalize_weeks(week_row, selected_weeks, num_weeks):
         if count == num_weeks:
             break
 
-    total = 0
-    for i in range(index_first_week):
-        total += week_row[i]
+    if not educator_flag:
+        total_before = 0
+        for i in range(index_first_week):
+            total_before += week_row[i]
 
-    normalized_week_row[0] += total
+        normalized_week_row[0] += total_before
 
     return normalized_week_row
 
@@ -197,3 +211,25 @@ def _effort_factor(course_table, index_first_week, num_weeks):
         count = 0
 
     return course_table
+
+
+def _total_educator_interactions(educators, selected_weeks, num_weeks):
+
+    total_edu_interactions = 0
+    for edu in educators.values():
+        weeks = _get_week_interaction(edu)
+        n_weeks = _normalize_weeks(weeks, selected_weeks, num_weeks, 1)
+
+        for num in n_weeks:
+            total_edu_interactions += num
+
+    return total_edu_interactions
+
+
+def _ratio_educator(total_edu_interaction, n_weeks):
+
+    total = 0
+    for week in n_weeks:
+        total += week
+
+    return round(total/float(total_edu_interaction),2)
