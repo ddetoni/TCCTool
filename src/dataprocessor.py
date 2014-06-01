@@ -20,11 +20,11 @@ def extract_semester_data(semester, course_weeks,
 
     info_header = ['NomeAluno', 'Disciplina', 'Situacao']
 
-    week_header = ['S'+str(i) for i in range(num_weeks)]
+    week_header = ['S'+str(i) for i in range(1, num_weeks+1)]
 
     stats_header = ['Media', 'MediaDif', 'ZeroSem', 'Mediana']
 
-    week_ef_header = ['EF-S'+str(i) for i in range(num_weeks)]
+    week_ef_header = ['EF-S'+str(i) for i in range(1, num_weeks+1)]
 
     header = info_header + week_header + stats_header + week_ef_header
     table = []
