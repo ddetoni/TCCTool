@@ -12,7 +12,7 @@ import math
 
 
 def extract_semester_data(semester, course_weeks,
-                          num_weeks, name, option='', save_path='../'):
+                          num_weeks, name, save_path='../'):
     file_name = name + '.csv'
     file_path = save_path + file_name
     data_file = open(file_path, 'wb')
@@ -21,17 +21,11 @@ def extract_semester_data(semester, course_weeks,
     info_header = ['NomeAluno', 'Situacao', 'Disciplina',
                    'TotalProf', 'TotalTutores']
 
-    if option == '-c':
-        week_header = ['S'+str(i) for i in range(7)]
-    else:
-        week_header = ['S'+str(i) for i in range(num_weeks)]
+    week_header = ['S'+str(i) for i in range(num_weeks)]
 
     stats_header = ['Media', 'MediaDif', 'ZeroSem', 'Mediana']
 
-    if option == '-c':
-        week_ef_header = ['EF-S'+str(i) for i in range(7)]
-    else:
-        week_ef_header = ['EF-S'+str(i) for i in range(num_weeks)]
+    week_ef_header = ['EF-S'+str(i) for i in range(num_weeks)]
 
     header = info_header + week_header + stats_header + week_ef_header
     table = []
@@ -41,8 +35,7 @@ def extract_semester_data(semester, course_weeks,
 
         course_table = _extract_course_data(course,
                                             course_weeks[name],
-                                            num_weeks,
-                                            option)
+                                            num_weeks)
 
         table.extend(course_table)
 
@@ -50,7 +43,7 @@ def extract_semester_data(semester, course_weeks,
     data_file.close()
 
 
-def _extract_course_data(course, selected_weeks, num_weeks, option):
+def _extract_course_data(course, selected_weeks, num_weeks):
 
     course_table = []
     for s_name, student in course.students.iteritems():
@@ -69,10 +62,6 @@ def _extract_course_data(course, selected_weeks, num_weeks, option):
                                       num_weeks)
         row.extend(n_week_row)
 
-        if option == '-c':
-            complete_row = [-1]*(7-num_weeks)
-            row.extend(complete_row)
-
         mean_w = _mean_week_row(n_week_row)
         row.append(mean_w)
 
@@ -87,7 +76,7 @@ def _extract_course_data(course, selected_weeks, num_weeks, option):
 
         course_table.append(row)
 
-    course_table = _effort_factor(course_table, 5, num_weeks, option)
+    course_table = _effort_factor(course_table, 5, num_weeks)
 
     return course_table
 
@@ -188,7 +177,7 @@ def _median_week_row(week_row):
     return week_row[mid_point]
 
 
-def _effort_factor(course_table, index_first_week, num_weeks, option):
+def _effort_factor(course_table, index_first_week, num_weeks):
     '''
     This fucntion calculate the Effor Factor, which is the sum of all
     student interactions in a week and divided by the total of students.
@@ -208,10 +197,5 @@ def _effort_factor(course_table, index_first_week, num_weeks, option):
 
         total = 0
         count = 0
-
-    if option == '-c':
-        for row in course_table:
-            complete_row = [-1]*(7-num_weeks)
-            row.extend(complete_row)
 
     return course_table
