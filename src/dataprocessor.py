@@ -18,8 +18,7 @@ def extract_semester_data(semester, course_weeks,
     data_file = open(file_path, 'wb')
     csv_file = csv.writer(data_file, delimiter=',')
 
-    info_header = ['NomeAluno', 'Situacao', 'Disciplina',
-                   'TotalProf', 'TotalTutores']
+    info_header = ['NomeAluno', 'Disciplina', 'Situacao']
 
     week_header = ['S'+str(i) for i in range(num_weeks)]
 
@@ -49,10 +48,8 @@ def _extract_course_data(course, selected_weeks, num_weeks):
     for s_name, student in course.students.iteritems():
         row = [
             s_name.encode('utf8'),
-            'aprovado' if student.result == 2 else 'reprovado',
             course.name,
-            len(course.professors),
-            len(course.tutors)
+            'aprovado' if student.result == 2 else 'reprovado'
             ]
 
         week_row = _get_week_interaction(student)
@@ -60,6 +57,7 @@ def _extract_course_data(course, selected_weeks, num_weeks):
         n_week_row = _normalize_weeks(week_row,
                                       selected_weeks,
                                       num_weeks)
+
         row.extend(n_week_row)
 
         mean_w = _mean_week_row(n_week_row)
@@ -76,7 +74,7 @@ def _extract_course_data(course, selected_weeks, num_weeks):
 
         course_table.append(row)
 
-    course_table = _effort_factor(course_table, 5, num_weeks)
+    course_table = _effort_factor(course_table, 3, num_weeks)
 
     return course_table
 
