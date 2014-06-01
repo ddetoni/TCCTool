@@ -108,14 +108,24 @@ def _get_week_interaction(student):
 def _normalize_weeks(week_row, selected_weeks, num_weeks):
 
     count = 0
+    index_first_week = 0
     normalized_week_row = []
     for i in range(len(week_row)):
         if i in selected_weeks:
             normalized_week_row.append(week_row[i])
+            if count == 0:
+                index_first_week = i
+
             count += 1
 
         if count == num_weeks:
             break
+
+    total = 0
+    for i in range(index_first_week):
+        total += week_row[i]
+
+    normalized_week_row[0] += total
 
     return normalized_week_row
 
