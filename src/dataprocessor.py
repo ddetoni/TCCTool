@@ -47,8 +47,13 @@ def _extract_course_data(course, selected_weeks, num_weeks):
 
     course_table = []
 
-    total_prof_interactions = _total_educator_interactions(course.professors, selected_weeks, num_weeks)
-    total_tut_interactions = _total_educator_interactions(course.tutors, selected_weeks, num_weeks)
+    total_prof_interactions = _total_educator_interactions(course.professors,
+                                                           selected_weeks,
+                                                           num_weeks)
+
+    total_tut_interactions = _total_educator_interactions(course.tutors,
+                                                          selected_weeks,
+                                                          num_weeks)
 
     for s_name, student in course.students.iteritems():
         row = [
@@ -232,4 +237,4 @@ def _ratio_educator(total_edu_interaction, n_weeks):
     for week in n_weeks:
         total += week
 
-    return round(total/float(total_edu_interaction),2)
+    return round(total/float(total_edu_interaction), 2)

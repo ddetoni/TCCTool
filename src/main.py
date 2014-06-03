@@ -251,6 +251,7 @@ if __name__ == '__main__':
     #semester_3.save("../data/CLEC/third_semester/")
 
     semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
+    semester_1.correct_situation('../data/CLEC/first_semester/correct_situation.csv')
     #semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
     #semester_3 = Semester("Semester_3").load("../data/CLEC/third_semester/Semester_3.srz")
 
@@ -273,12 +274,12 @@ if __name__ == '__main__':
     #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
 
     selected_weeks = select_weeks(semester_1)
-    dp.extract_semester_data(semester_1, selected_weeks, 1, 's1_f', '../csv/dados/')
-    dp.extract_semester_data(semester_1, selected_weeks, 2, 's2_f', '../csv/dados/')
-    dp.extract_semester_data(semester_1, selected_weeks, 3, 's3_f', '../csv/dados/')
-    dp.extract_semester_data(semester_1, selected_weeks, 4, 's4_f', '../csv/dados/')
-    dp.extract_semester_data(semester_1, selected_weeks, 5, 's5_f', '../csv/dados/')
-    dp.extract_semester_data(semester_1, selected_weeks, 6, 's6_f', '../csv/dados/')
+    #dp.extract_semester_data(semester_1, selected_weeks, 1, 's1_f', '../csv/dados/')
+    #dp.extract_semester_data(semester_1, selected_weeks, 2, 's2_f', '../csv/dados/')
+    #dp.extract_semester_data(semester_1, selected_weeks, 3, 's3_f', '../csv/dados/')
+    #dp.extract_semester_data(semester_1, selected_weeks, 4, 's4_f', '../csv/dados/')
+    #dp.extract_semester_data(semester_1, selected_weeks, 5, 's5_f', '../csv/dados/')
+    #dp.extract_semester_data(semester_1, selected_weeks, 6, 's6_f', '../csv/dados/')
     dp.extract_semester_data(semester_1, selected_weeks, 7, 's7_f', '../csv/dados/')
 
     #selected_weeks = select_weeks(semester_2)
