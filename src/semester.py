@@ -68,8 +68,8 @@ class Semester:
         already_printed = []
 
         for course in self.courses.itervalues():
-            for student in course.students.itervalues():
-                complete_name = student.name + ' ' + student.last_name
+            for key, student in course.students.iteritems():
+                complete_name = key
                 if complete_name not in already_printed:
                     already_printed.append(complete_name)
                     print complete_name + ' - ' + str(student.result)
