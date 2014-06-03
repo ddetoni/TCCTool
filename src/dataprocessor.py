@@ -55,9 +55,11 @@ def extract_semester_data(semester, course_weeks,
 
     csv_file_g1.writerows(table_1)
     data_file_g1.close()
+    print 'File: ' + file_name_g1 + ' generated.'
 
     csv_file_g2.writerows(table_2)
     data_file_g2.close()
+    print 'File: ' + file_name_g2 + ' generated.'
 
 
 def _extract_course_data(course, selected_weeks, num_weeks, group_1, group_2):
