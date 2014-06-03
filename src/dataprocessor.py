@@ -12,11 +12,19 @@ import math
 
 
 def extract_semester_data(semester, course_weeks,
-                          num_weeks, name, save_path='../'):
-    file_name = name + '.csv'
-    file_path = save_path + file_name
-    data_file = open(file_path, 'wb')
-    csv_file = csv.writer(data_file, delimiter=',')
+                          num_weeks, group_1, group_2,
+                          name, save_path='../'):
+    file_name_g1 = name + '_t1.csv'
+    file_name_g2 = name + '_t2.csv'
+
+    file_path_g1 = save_path + file_name_g1
+    file_path_g2 = save_path + file_name_g2
+
+    data_file_g1 = open(file_path_g1, 'wb')
+    csv_file_g1 = csv.writer(data_file_g1, delimiter=',')
+
+    data_file_g2 = open(file_path_g2, 'wb')
+    csv_file_g2 = csv.writer(data_file_g2, delimiter=',')
 
     info_header = ['NomeAluno', 'Disciplina', 'Situacao']
 
@@ -28,24 +36,34 @@ def extract_semester_data(semester, course_weeks,
     week_ef_header = ['EF-S'+str(i) for i in range(1, num_weeks+1)]
 
     header = info_header + week_header + stats_header + week_ef_header
-    table = []
-    table.append(header)
+    table_1 = []
+    table_2 = []
+
+    table_1.append(header)
+    table_2.append(header)
 
     for name, course in semester.courses.iteritems():
 
-        course_table = _extract_course_data(course,
-                                            course_weeks[name],
-                                            num_weeks)
+        course_table_1, course_table_2 = _extract_course_data(course,
+                                                              course_weeks[name],
+                                                              num_weeks,
+                                                              group_1,
+                                                              group_2)
 
-        table.extend(course_table)
+        table_1.extend(course_table_1)
+        table_2.extend(course_table_2)
 
-    csv_file.writerows(table)
-    data_file.close()
+    csv_file_g1.writerows(table_1)
+    data_file_g1.close()
+
+    csv_file_g2.writerows(table_2)
+    data_file_g2.close()
 
 
-def _extract_course_data(course, selected_weeks, num_weeks):
+def _extract_course_data(course, selected_weeks, num_weeks, group_1, group_2):
 
-    course_table = []
+    course_table_1 = []
+    course_table_2 = []
 
     total_prof_interactions = _total_educator_interactions(course.professors,
                                                            selected_weeks,
@@ -89,11 +107,15 @@ def _extract_course_data(course, selected_weeks, num_weeks):
         ratio_tutor = _ratio_educator(total_tut_interactions, n_week_row)
         row.append(ratio_tutor)
 
-        course_table.append(row)
+        if s_name in group_1:
+            course_table_1.append(row)
+        elif s_name in group_2:
+            course_table_2.append(row)
 
-    course_table = _effort_factor(course_table, 3, num_weeks)
+    course_table_1 = _effort_factor(course_table_1, 3, num_weeks)
+    course_table_2 = _effort_factor(course_table_2, 3, num_weeks)
 
-    return course_table
+    return course_table_1, course_table_2
 
 
 def _get_week_interaction(student):

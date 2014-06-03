@@ -6,6 +6,7 @@ Created on 04/12/2013
 '''
 import pickle
 import unicodecsv
+import random
 
 
 class Semester:
@@ -139,3 +140,26 @@ class Semester:
                     student = self.courses[row[1]].students[row[0]]
                     student.result = 2
                     self.courses[row[1]].students[row[0]] = student
+
+    def get_groups(self):
+        group_1 = []
+        group_2 = []
+
+        students = self.get_all_student_names()
+        total_students = len(students)
+
+        group_flag = 1
+        while total_students:
+            index = random.randint(0, total_students-1)
+            student = students.pop(index)
+
+            if group_flag == 1:
+                group_1.append(student)
+                total_students -= 1
+                group_flag = 2
+            elif group_flag == 2:
+                group_2.append(student)
+                total_students -= 1
+                group_flag = 1
+
+        return group_1, group_2

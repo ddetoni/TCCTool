@@ -252,6 +252,7 @@ if __name__ == '__main__':
 
     semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
     semester_1.correct_situation('../data/CLEC/first_semester/correct_situation.csv')
+    S1_group1, S1_group2 = semester_1.get_groups()
 
     #semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
     #semester_2.correct_situation('../data/CLEC/second_semester/correct_situation.csv')
@@ -278,7 +279,7 @@ if __name__ == '__main__':
     selected_weeks = select_weeks(semester_1)
     #dp.extract_semester_data(semester_1, selected_weeks, 1, 's1_f', '../csv/dados/')
     #dp.extract_semester_data(semester_1, selected_weeks, 2, 's2_f', '../csv/dados/')
-    dp.extract_semester_data(semester_1, selected_weeks, 3, 'clec_S1_se3', '../csv/dados/')
+    dp.extract_semester_data(semester_1, selected_weeks, 3, S1_group1, S1_group2, 'clec_S1_se3', '../csv/dados/')
     #dp.extract_semester_data(semester_1, selected_weeks, 4, 's4_f', '../csv/dados/')
     #dp.extract_semester_data(semester_1, selected_weeks, 5, 's5_f', '../csv/dados/')
     #dp.extract_semester_data(semester_1, selected_weeks, 6, 's6_f', '../csv/dados/')
