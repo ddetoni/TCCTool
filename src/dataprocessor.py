@@ -9,6 +9,7 @@ Created on 06/05/2014
 import csv
 from utils import week_interaction
 import math
+import operator
 
 
 def extract_semester_data(semester, course_weeks,
@@ -76,6 +77,7 @@ def _extract_course_data(course, selected_weeks, num_weeks, group_1, group_2):
                                                           num_weeks)
 
     for s_name, student in course.students.iteritems():
+        s_name = s_name.replace("\'", "")
         row = [
             s_name.encode('utf8'),
             course.name,
@@ -116,6 +118,9 @@ def _extract_course_data(course, selected_weeks, num_weeks, group_1, group_2):
 
     course_table_1 = _effort_factor(course_table_1, 3, num_weeks)
     course_table_2 = _effort_factor(course_table_2, 3, num_weeks)
+
+    course_table_1 = sorted(course_table_1, key=operator.itemgetter(2))
+    course_table_2 = sorted(course_table_2, key=operator.itemgetter(2))
 
     return course_table_1, course_table_2
 
