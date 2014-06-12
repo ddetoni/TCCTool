@@ -116,6 +116,30 @@ class Semester:
 
         return student_names
 
+    def get_all_tutor_names(self):
+
+        tutor_names = []
+
+        for course in self.courses.itervalues():
+            for tutor in course.tutors.itervalues():
+                complete_name = tutor.name + ' ' + tutor.last_name
+                if complete_name not in tutor_names:
+                    tutor_names.append(complete_name)
+
+        return tutor_names
+
+    def get_all_professor_names(self):
+
+        professor_names = []
+
+        for course in self.courses.itervalues():
+            for professor in course.professors.itervalues():
+                complete_name = professor.name + ' ' + professor.last_name
+                if complete_name not in professor_names:
+                    professor_names.append(complete_name)
+
+        return professor_names
+
     def verify_approved(self, following_semester):
 
         s_names = following_semester.get_all_student_names()

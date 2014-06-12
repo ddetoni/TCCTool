@@ -251,12 +251,14 @@ if __name__ == '__main__':
     #semester_3.save("../data/CLEC/third_semester/")
 
     semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
-    semester_1.correct_situation('../data/CLEC/first_semester/correct_situation.csv')
-    S1_group1, S1_group2 = semester_1.get_groups()
+    #semester_1.correct_situation('../data/CLEC/first_semester/correct_situation.csv')
+    #S1_group1, S1_group2 = semester_1.get_groups()
+    print len(semester_1.get_all_professor_names())
 
     semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
-    semester_2.correct_situation('../data/CLEC/second_semester/correct_situation.csv')
-    S2_group1, S2_group2 = semester_2.get_groups()
+    #semester_2.correct_situation('../data/CLEC/second_semester/correct_situation.csv')
+    #S2_group1, S2_group2 = semester_2.get_groups()
+    print len(semester_2.get_all_professor_names())
 
     #semester_3 = Semester("Semester_3").load("../data/CLEC/third_semester/Semester_3.srz")
 
@@ -268,6 +270,7 @@ if __name__ == '__main__':
     #first_weeks_s2 = {'APE_II':43,'EAD_II':32,'EPP_II':37,'EC_II':37,'PE_II':43}
     #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
 
+    '''
     selected_weeks = select_weeks(semester_1)
     dp.extract_semester_data(semester_1, selected_weeks, 1, S1_group1, S1_group2, 'clec_S1_se1', '../processed_data/CSV/CLEC/semestre_1/se1/')
     dp.extract_semester_data(semester_1, selected_weeks, 2, S1_group1, S1_group2, 'clec_S1_se2', '../processed_data/CSV/CLEC/semestre_1/se2/')
@@ -285,6 +288,7 @@ if __name__ == '__main__':
     dp.extract_semester_data(semester_2, selected_weeks, 5, S2_group1, S2_group2, 'clec_S2_se5', '../processed_data/CSV/CLEC/semestre_2/se5/')
     dp.extract_semester_data(semester_2, selected_weeks, 6, S2_group1, S2_group2, 'clec_S2_se6', '../processed_data/CSV/CLEC/semestre_2/se6/')
     dp.extract_semester_data(semester_2, selected_weeks, 7, S2_group1, S2_group2, 'clec_S2_se7', '../processed_data/CSV/CLEC/semestre_2/se7/')
+    '''
 
     #-------------------------------------------------------------------------------------#
 
@@ -300,9 +304,12 @@ if __name__ == '__main__':
     #semester_3.save("../data/CLPD/third_semester/")
 
     semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
-    S1_group1, S1_group2 = semester_1.get_groups()
+    #S1_group1, S1_group2 = semester_1.get_groups()
+    print len(semester_1.get_all_professor_names())
+
     semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
-    S2_group1, S2_group2 = semester_2.get_groups()
+    #S2_group1, S2_group2 = semester_2.get_groups()
+    print len(semester_2.get_all_professor_names())
 
     #semester_3 = Semester("Semester_3").load("../data/CLPD/third_semester/Semester_3.srz")
 
@@ -315,6 +322,7 @@ if __name__ == '__main__':
     #selected_weeks = select_weeks(semester_2)
     #dp.extract_semester_data(semester_2, selected_weeks, 7, 'clpd_s2', '../csv/selecionado_normalizado/')
 
+    '''
     selected_weeks = select_weeks(semester_1)
     dp.extract_semester_data(semester_1, selected_weeks, 1, S1_group1, S1_group2, 'clpd_S1_se1', '../processed_data/CSV/CLPD/semestre_1/se1/')
     dp.extract_semester_data(semester_1, selected_weeks, 2, S1_group1, S1_group2, 'clpd_S1_se2', '../processed_data/CSV/CLPD/semestre_1/se2/')
@@ -332,3 +340,4 @@ if __name__ == '__main__':
     dp.extract_semester_data(semester_2, selected_weeks, 5, S2_group1, S2_group2, 'clpd_S2_se5', '../processed_data/CSV/CLPD/semestre_2/se5/')
     dp.extract_semester_data(semester_2, selected_weeks, 6, S2_group1, S2_group2, 'clpd_S2_se6', '../processed_data/CSV/CLPD/semestre_2/se6/')
     dp.extract_semester_data(semester_2, selected_weeks, 7, S2_group1, S2_group2, 'clpd_S2_se7', '../processed_data/CSV/CLPD/semestre_2/se7/')
+    '''
