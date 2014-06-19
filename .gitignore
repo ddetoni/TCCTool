@@ -15,7 +15,14 @@
 .settings/
 
 /graphics_v2/
-/processed_data/CSV/
-/processed_data/ARFF/
+/processed_data/pd1/
+/processed_data/pd2/
+/processed_data/pd3/
+/processed_data/pd4/
+/processed_data/pd5/
 
-/results/entre_turmas/
+/results/r1/
+/results/r2/
+/results/r3/
+/results/r4/
+/results/r5/

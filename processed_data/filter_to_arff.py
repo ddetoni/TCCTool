@@ -61,18 +61,18 @@ def filter_weka_arff(file_paths, base_name):
                                                 path_split[4],
                                                 path_split[6]), path_split[4]
 
-    command = 'java -classpath ../weka.jar weka.filters.unsupervised.attribute.Remove -R 1,2,{}-{} -i {} -o {}'
+    command = 'java -classpath ../weka.jar weka.filters.unsupervised.attribute.Remove -R 1,2 -i {} -o {}'
     for file_path in file_paths:
         out_path, se_number = arff_path(file_path)
         num_weeks = int(se_number[2])
         print num_weeks
 
-        os.system(command.format(4+num_weeks,3+num_weeks+6+num_weeks, file_path, out_path))
+        os.system(command.format(file_path, out_path))
         print "Converted: {}".format(out_path)
 
 
 if __name__ == "__main__":
 
-    file_paths = get_all_file_paths('./CSV/')
-    create_dir_skeleton('ARFF2')
-    filter_weka_arff(file_paths, 'ARFF2')
+    file_paths = get_all_file_paths('./CSV_balanced/')
+    create_dir_skeleton('ARFF_balanced')
+    filter_weka_arff(file_paths, 'ARFF_balanced')

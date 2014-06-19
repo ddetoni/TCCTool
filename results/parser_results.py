@@ -107,38 +107,20 @@ def generate_csv_info(file_paths, save_path):
 
 
 if __name__ == "__main__":
-    file_paths = get_all_file_paths('./entre_semestres/CLEC/')
-    generate_csv_info(file_paths, './entre_semestres/CLEC/')
+    file_paths = get_all_file_paths('./balanceado/entre_semestres/CLEC/')
+    generate_csv_info(file_paths, './balanceado/entre_semestres/CLEC/')
 
-    file_paths = get_all_file_paths('./entre_semestres/CLPD/')
-    generate_csv_info(file_paths, './entre_semestres/CLPD/')
+    file_paths = get_all_file_paths('./balanceado/entre_semestres/CLPD/')
+    generate_csv_info(file_paths, './balanceado/entre_semestres/CLPD/')
 
-    file_paths = get_all_file_paths('./entre_turmas/CLEC/semestre_1/')
-    generate_csv_info(file_paths, './entre_turmas/CLEC/semestre_1/')
+    file_paths = get_all_file_paths('./balanceado/entre_turmas/CLEC/semestre_1/')
+    generate_csv_info(file_paths, './balanceado/entre_turmas/CLEC/semestre_1/')
 
-    file_paths = get_all_file_paths('./entre_turmas/CLEC/semestre_2/')
-    generate_csv_info(file_paths, './entre_turmas/CLEC/semestre_2/')
+    file_paths = get_all_file_paths('./balanceado/entre_turmas/CLEC/semestre_2/')
+    generate_csv_info(file_paths, './balanceado/entre_turmas/CLEC/semestre_2/')
 
-    file_paths = get_all_file_paths('./entre_turmas/CLPD/semestre_1/')
-    generate_csv_info(file_paths, './entre_turmas/CLPD/semestre_1/')
+    file_paths = get_all_file_paths('./balanceado/entre_turmas/CLPD/semestre_1/')
+    generate_csv_info(file_paths, './balanceado/entre_turmas/CLPD/semestre_1/')
 
-    file_paths = get_all_file_paths('./entre_turmas/CLPD/semestre_2/')
-    generate_csv_info(file_paths, './entre_turmas/CLPD/semestre_2/')
-
-    file_paths = get_all_file_paths('./sem_atributos/entre_semestres/CLEC/')
-    generate_csv_info(file_paths, './sem_atributos/entre_semestres/CLEC/')
-
-    file_paths = get_all_file_paths('./sem_atributos/entre_semestres/CLPD/')
-    generate_csv_info(file_paths, './sem_atributos/entre_semestres/CLPD/')
-
-    file_paths = get_all_file_paths('./sem_atributos/entre_turmas/CLEC/semestre_1/')
-    generate_csv_info(file_paths, './sem_atributos/entre_turmas/CLEC/semestre_1/')
-
-    file_paths = get_all_file_paths('./sem_atributos/entre_turmas/CLEC/semestre_2/')
-    generate_csv_info(file_paths, './sem_atributos/entre_turmas/CLEC/semestre_2/')
-
-    file_paths = get_all_file_paths('./sem_atributos/entre_turmas/CLPD/semestre_1/')
-    generate_csv_info(file_paths, './sem_atributos/entre_turmas/CLPD/semestre_1/')
-
-    file_paths = get_all_file_paths('./sem_atributos/entre_turmas/CLPD/semestre_2/')
-    generate_csv_info(file_paths, './sem_atributos/entre_turmas/CLPD/semestre_2/')
+    file_paths = get_all_file_paths('./balanceado/entre_turmas/CLPD/semestre_2/')
+    generate_csv_info(file_paths, './balanceado/entre_turmas/CLPD/semestre_2/')

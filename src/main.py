@@ -9,7 +9,7 @@ Created on 26/11/2013
 from dataloader import DataLoader
 from semester import Semester
 from visual_graphic import save_graphic_semester, build_boxplot, save_graphic_group, save_graphics_reproveds
-from utils import generate_semester_csv, generate_semester_csv_normalized, select_weeks
+from utils import select_weeks
 import dataprocessor as dp
 
 def load_first_semester_clec():
@@ -251,44 +251,34 @@ if __name__ == '__main__':
     #semester_3.save("../data/CLEC/third_semester/")
 
     semester_1 = Semester("Semester_1").load("../data/CLEC/first_semester/Semester_1.srz")
-    #semester_1.correct_situation('../data/CLEC/first_semester/correct_situation.csv')
-    #S1_group1, S1_group2 = semester_1.get_groups()
-    print len(semester_1.get_all_professor_names())
+    semester_1.correct_situation('../data/CLEC/first_semester/correct_situation.csv')
+    S1_group1, S1_group2 = semester_1.get_groups()
+    #print len(semester_1.get_all_professor_names())
 
     semester_2 = Semester("Semester_2").load("../data/CLEC/second_semester/Semester_2.srz")
-    #semester_2.correct_situation('../data/CLEC/second_semester/correct_situation.csv')
-    #S2_group1, S2_group2 = semester_2.get_groups()
-    print len(semester_2.get_all_professor_names())
+    semester_2.correct_situation('../data/CLEC/second_semester/correct_situation.csv')
+    S2_group1, S2_group2 = semester_2.get_groups()
+    #print len(semester_2.get_all_professor_names())
 
     #semester_3 = Semester("Semester_3").load("../data/CLEC/third_semester/Semester_3.srz")
 
-    #generate_semester_csv(semester_2,'CLEC', 52, '../csv/')
-
-    #first_weeks_s1 = {'APE_I':15,'EAD_I':10,'EPP_I':21,'EC_I':21,'PE_I':15}
-    #generate_semester_csv_normalized(semester_1,'CLEC', first_weeks_s1, '../csv/')
-
-    #first_weeks_s2 = {'APE_II':43,'EAD_II':32,'EPP_II':37,'EC_II':37,'PE_II':43}
-    #generate_semester_csv_normalized(semester_2,'CLEC', first_weeks_s2, '../csv/')
-
-    '''
     selected_weeks = select_weeks(semester_1)
-    dp.extract_semester_data(semester_1, selected_weeks, 1, S1_group1, S1_group2, 'clec_S1_se1', '../processed_data/CSV/CLEC/semestre_1/se1/')
-    dp.extract_semester_data(semester_1, selected_weeks, 2, S1_group1, S1_group2, 'clec_S1_se2', '../processed_data/CSV/CLEC/semestre_1/se2/')
-    dp.extract_semester_data(semester_1, selected_weeks, 3, S1_group1, S1_group2, 'clec_S1_se3', '../processed_data/CSV/CLEC/semestre_1/se3/')
-    dp.extract_semester_data(semester_1, selected_weeks, 4, S1_group1, S1_group2, 'clec_S1_se4', '../processed_data/CSV/CLEC/semestre_1/se4/')
-    dp.extract_semester_data(semester_1, selected_weeks, 5, S1_group1, S1_group2, 'clec_S1_se5', '../processed_data/CSV/CLEC/semestre_1/se5/')
-    dp.extract_semester_data(semester_1, selected_weeks, 6, S1_group1, S1_group2, 'clec_S1_se6', '../processed_data/CSV/CLEC/semestre_1/se6/')
-    dp.extract_semester_data(semester_1, selected_weeks, 7, S1_group1, S1_group2, 'clec_S1_se7', '../processed_data/CSV/CLEC/semestre_1/se7/')
+    dp.extract_semester_data(semester_1, selected_weeks, 1, S1_group1, S1_group2, 'clec_S1_se1', '../processed_data/pd5/CSV_b/CLEC/semestre_1/se1/')
+    dp.extract_semester_data(semester_1, selected_weeks, 2, S1_group1, S1_group2, 'clec_S1_se2', '../processed_data/pd5/CSV_b/CLEC/semestre_1/se2/')
+    dp.extract_semester_data(semester_1, selected_weeks, 3, S1_group1, S1_group2, 'clec_S1_se3', '../processed_data/pd5/CSV_b/CLEC/semestre_1/se3/')
+    dp.extract_semester_data(semester_1, selected_weeks, 4, S1_group1, S1_group2, 'clec_S1_se4', '../processed_data/pd5/CSV_b/CLEC/semestre_1/se4/')
+    dp.extract_semester_data(semester_1, selected_weeks, 5, S1_group1, S1_group2, 'clec_S1_se5', '../processed_data/pd5/CSV_b/CLEC/semestre_1/se5/')
+    dp.extract_semester_data(semester_1, selected_weeks, 6, S1_group1, S1_group2, 'clec_S1_se6', '../processed_data/pd5/CSV_b/CLEC/semestre_1/se6/')
+    dp.extract_semester_data(semester_1, selected_weeks, 7, S1_group1, S1_group2, 'clec_S1_se7', '../processed_data/pd5/CSV_b/CLEC/semestre_1/se7/')
 
     selected_weeks = select_weeks(semester_2)
-    dp.extract_semester_data(semester_2, selected_weeks, 1, S2_group1, S2_group2, 'clec_S2_se1', '../processed_data/CSV/CLEC/semestre_2/se1/')
-    dp.extract_semester_data(semester_2, selected_weeks, 2, S2_group1, S2_group2, 'clec_S2_se2', '../processed_data/CSV/CLEC/semestre_2/se2/')
-    dp.extract_semester_data(semester_2, selected_weeks, 3, S2_group1, S2_group2, 'clec_S2_se3', '../processed_data/CSV/CLEC/semestre_2/se3/')
-    dp.extract_semester_data(semester_2, selected_weeks, 4, S2_group1, S2_group2, 'clec_S2_se4', '../processed_data/CSV/CLEC/semestre_2/se4/')
-    dp.extract_semester_data(semester_2, selected_weeks, 5, S2_group1, S2_group2, 'clec_S2_se5', '../processed_data/CSV/CLEC/semestre_2/se5/')
-    dp.extract_semester_data(semester_2, selected_weeks, 6, S2_group1, S2_group2, 'clec_S2_se6', '../processed_data/CSV/CLEC/semestre_2/se6/')
-    dp.extract_semester_data(semester_2, selected_weeks, 7, S2_group1, S2_group2, 'clec_S2_se7', '../processed_data/CSV/CLEC/semestre_2/se7/')
-    '''
+    dp.extract_semester_data(semester_2, selected_weeks, 1, S2_group1, S2_group2, 'clec_S2_se1', '../processed_data/pd5/CSV_b/CLEC/semestre_2/se1/')
+    dp.extract_semester_data(semester_2, selected_weeks, 2, S2_group1, S2_group2, 'clec_S2_se2', '../processed_data/pd5/CSV_b/CLEC/semestre_2/se2/')
+    dp.extract_semester_data(semester_2, selected_weeks, 3, S2_group1, S2_group2, 'clec_S2_se3', '../processed_data/pd5/CSV_b/CLEC/semestre_2/se3/')
+    dp.extract_semester_data(semester_2, selected_weeks, 4, S2_group1, S2_group2, 'clec_S2_se4', '../processed_data/pd5/CSV_b/CLEC/semestre_2/se4/')
+    dp.extract_semester_data(semester_2, selected_weeks, 5, S2_group1, S2_group2, 'clec_S2_se5', '../processed_data/pd5/CSV_b/CLEC/semestre_2/se5/')
+    dp.extract_semester_data(semester_2, selected_weeks, 6, S2_group1, S2_group2, 'clec_S2_se6', '../processed_data/pd5/CSV_b/CLEC/semestre_2/se6/')
+    dp.extract_semester_data(semester_2, selected_weeks, 7, S2_group1, S2_group2, 'clec_S2_se7', '../processed_data/pd5/CSV_b/CLEC/semestre_2/se7/')
 
     #-------------------------------------------------------------------------------------#
 
@@ -304,40 +294,29 @@ if __name__ == '__main__':
     #semester_3.save("../data/CLPD/third_semester/")
 
     semester_1 = Semester("Semester_1").load("../data/CLPD/first_semester/Semester_1.srz")
-    #S1_group1, S1_group2 = semester_1.get_groups()
-    print len(semester_1.get_all_professor_names())
+    S1_group1, S1_group2 = semester_1.get_groups()
+    #print len(semester_1.get_all_professor_names())
 
     semester_2 = Semester("Semester_2").load("../data/CLPD/second_semester/Semester_2.srz")
-    #S2_group1, S2_group2 = semester_2.get_groups()
-    print len(semester_2.get_all_professor_names())
+    S2_group1, S2_group2 = semester_2.get_groups()
+    #print len(semester_2.get_all_professor_names())
 
     #semester_3 = Semester("Semester_3").load("../data/CLPD/third_semester/Semester_3.srz")
 
-    #first_weeks_s1 = {'CESADE_I':16,'CESEI_I':19,'EAD-NB':2,'CESEB_I':12,'APE_I':6}
-    #generate_semester_csv_normalized(semester_1,'CLPD', first_weeks_s1, '../csv/')
-
-    #first_weeks_s1 = {'CESADE_II':30,'CESEI_II':34,'ECO_I':34,'CESEB_II':30,'APE_II':30}
-    #generate_semester_csv_normalized(semester_2,'CLPD', first_weeks_s1, '../csv/')
-
-    #selected_weeks = select_weeks(semester_2)
-    #dp.extract_semester_data(semester_2, selected_weeks, 7, 'clpd_s2', '../csv/selecionado_normalizado/')
-
-    '''
     selected_weeks = select_weeks(semester_1)
-    dp.extract_semester_data(semester_1, selected_weeks, 1, S1_group1, S1_group2, 'clpd_S1_se1', '../processed_data/CSV/CLPD/semestre_1/se1/')
-    dp.extract_semester_data(semester_1, selected_weeks, 2, S1_group1, S1_group2, 'clpd_S1_se2', '../processed_data/CSV/CLPD/semestre_1/se2/')
-    dp.extract_semester_data(semester_1, selected_weeks, 3, S1_group1, S1_group2, 'clpd_S1_se3', '../processed_data/CSV/CLPD/semestre_1/se3/')
-    dp.extract_semester_data(semester_1, selected_weeks, 4, S1_group1, S1_group2, 'clpd_S1_se4', '../processed_data/CSV/CLPD/semestre_1/se4/')
-    dp.extract_semester_data(semester_1, selected_weeks, 5, S1_group1, S1_group2, 'clpd_S1_se5', '../processed_data/CSV/CLPD/semestre_1/se5/')
-    dp.extract_semester_data(semester_1, selected_weeks, 6, S1_group1, S1_group2, 'clpd_S1_se6', '../processed_data/CSV/CLPD/semestre_1/se6/')
-    dp.extract_semester_data(semester_1, selected_weeks, 7, S1_group1, S1_group2, 'clpd_S1_se7', '../processed_data/CSV/CLPD/semestre_1/se7/')
+    dp.extract_semester_data(semester_1, selected_weeks, 1, S1_group1, S1_group2, 'clpd_S1_se1', '../processed_data/pd5/CSV_b/CLPD/semestre_1/se1/')
+    dp.extract_semester_data(semester_1, selected_weeks, 2, S1_group1, S1_group2, 'clpd_S1_se2', '../processed_data/pd5/CSV_b/CLPD/semestre_1/se2/')
+    dp.extract_semester_data(semester_1, selected_weeks, 3, S1_group1, S1_group2, 'clpd_S1_se3', '../processed_data/pd5/CSV_b/CLPD/semestre_1/se3/')
+    dp.extract_semester_data(semester_1, selected_weeks, 4, S1_group1, S1_group2, 'clpd_S1_se4', '../processed_data/pd5/CSV_b/CLPD/semestre_1/se4/')
+    dp.extract_semester_data(semester_1, selected_weeks, 5, S1_group1, S1_group2, 'clpd_S1_se5', '../processed_data/pd5/CSV_b/CLPD/semestre_1/se5/')
+    dp.extract_semester_data(semester_1, selected_weeks, 6, S1_group1, S1_group2, 'clpd_S1_se6', '../processed_data/pd5/CSV_b/CLPD/semestre_1/se6/')
+    dp.extract_semester_data(semester_1, selected_weeks, 7, S1_group1, S1_group2, 'clpd_S1_se7', '../processed_data/pd5/CSV_b/CLPD/semestre_1/se7/')
 
     selected_weeks = select_weeks(semester_2)
-    dp.extract_semester_data(semester_2, selected_weeks, 1, S2_group1, S2_group2, 'clpd_S2_se1', '../processed_data/CSV/CLPD/semestre_2/se1/')
-    dp.extract_semester_data(semester_2, selected_weeks, 2, S2_group1, S2_group2, 'clpd_S2_se2', '../processed_data/CSV/CLPD/semestre_2/se2/')
-    dp.extract_semester_data(semester_2, selected_weeks, 3, S2_group1, S2_group2, 'clpd_S2_se3', '../processed_data/CSV/CLPD/semestre_2/se3/')
-    dp.extract_semester_data(semester_2, selected_weeks, 4, S2_group1, S2_group2, 'clpd_S2_se4', '../processed_data/CSV/CLPD/semestre_2/se4/')
-    dp.extract_semester_data(semester_2, selected_weeks, 5, S2_group1, S2_group2, 'clpd_S2_se5', '../processed_data/CSV/CLPD/semestre_2/se5/')
-    dp.extract_semester_data(semester_2, selected_weeks, 6, S2_group1, S2_group2, 'clpd_S2_se6', '../processed_data/CSV/CLPD/semestre_2/se6/')
-    dp.extract_semester_data(semester_2, selected_weeks, 7, S2_group1, S2_group2, 'clpd_S2_se7', '../processed_data/CSV/CLPD/semestre_2/se7/')
-    '''
+    dp.extract_semester_data(semester_2, selected_weeks, 1, S2_group1, S2_group2, 'clpd_S2_se1', '../processed_data/pd5/CSV_b/CLPD/semestre_2/se1/')
+    dp.extract_semester_data(semester_2, selected_weeks, 2, S2_group1, S2_group2, 'clpd_S2_se2', '../processed_data/pd5/CSV_b/CLPD/semestre_2/se2/')
+    dp.extract_semester_data(semester_2, selected_weeks, 3, S2_group1, S2_group2, 'clpd_S2_se3', '../processed_data/pd5/CSV_b/CLPD/semestre_2/se3/')
+    dp.extract_semester_data(semester_2, selected_weeks, 4, S2_group1, S2_group2, 'clpd_S2_se4', '../processed_data/pd5/CSV_b/CLPD/semestre_2/se4/')
+    dp.extract_semester_data(semester_2, selected_weeks, 5, S2_group1, S2_group2, 'clpd_S2_se5', '../processed_data/pd5/CSV_b/CLPD/semestre_2/se5/')
+    dp.extract_semester_data(semester_2, selected_weeks, 6, S2_group1, S2_group2, 'clpd_S2_se6', '../processed_data/pd5/CSV_b/CLPD/semestre_2/se6/')
+    dp.extract_semester_data(semester_2, selected_weeks, 7, S2_group1, S2_group2, 'clpd_S2_se7', '../processed_data/pd5/CSV_b/CLPD/semestre_2/se7/')

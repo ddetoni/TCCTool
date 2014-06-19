@@ -10,6 +10,7 @@ import csv
 from utils import week_interaction
 import math
 import operator
+import random
 
 
 def extract_semester_data(semester, course_weeks,
@@ -37,6 +38,7 @@ def extract_semester_data(semester, course_weeks,
     week_ef_header = ['EF-S'+str(i) for i in range(1, num_weeks+1)]
 
     header = info_header + week_header + stats_header + week_ef_header
+    #header = info_header + week_header
     table_1 = []
     table_2 = []
 
@@ -116,11 +118,18 @@ def _extract_course_data(course, selected_weeks, num_weeks, group_1, group_2):
         elif s_name in group_2:
             course_table_2.append(row)
 
+    course_table_1 = _balanced_data(course_table_1,
+                                    total_tut_interactions,
+                                    total_prof_interactions)
+    course_table_2 = _balanced_data(course_table_2,
+                                    total_tut_interactions,
+                                    total_prof_interactions)
+
     course_table_1 = _effort_factor(course_table_1, 3, num_weeks)
     course_table_2 = _effort_factor(course_table_2, 3, num_weeks)
 
-    course_table_1 = sorted(course_table_1, key=operator.itemgetter(2))
-    course_table_2 = sorted(course_table_2, key=operator.itemgetter(2))
+    course_table_1 = sorted(course_table_1, key=operator.itemgetter(2,0))
+    course_table_2 = sorted(course_table_2, key=operator.itemgetter(2,0))
 
     return course_table_1, course_table_2
 
@@ -267,3 +276,64 @@ def _ratio_educator(total_edu_interaction, n_weeks):
         total += week
 
     return round(total/float(total_edu_interaction), 2)
+
+
+def _mutate_row(row, tutor_interactions, prof_interactions):
+    end_row = len(row) - 6
+    info_row = row[0:3]
+    mutated_row = row[3:end_row]
+    stats_row = []
+    new_row = []
+
+    rand_index = random.randint(0, len(mutated_row)-1)
+
+    total_sum = 0
+    for value in mutated_row:
+        total_sum += value
+
+    mean = int(total_sum/len(mutated_row))
+    new_value = random.randint(0, (mean + 1) * 2)
+    mutated_row[rand_index] = new_value
+
+    new_row = info_row + mutated_row
+
+    mean_w = _mean_week_row(mutated_row)
+    stats_row.append(mean_w)
+
+    mean_diff = _mean_diff(mutated_row)
+    stats_row.append(mean_diff)
+
+    zero_w = _count_zero_weeks(mutated_row)
+    stats_row.append(zero_w)
+
+    median_w = _median_week_row(mutated_row)
+    stats_row.append(median_w)
+
+    ratio_professor = _ratio_educator(prof_interactions, mutated_row)
+    stats_row.append(ratio_professor)
+
+    ratio_tutor = _ratio_educator(tutor_interactions, mutated_row)
+    stats_row.append(ratio_tutor)
+
+    return new_row + stats_row
+
+
+def _balanced_data(course_table, tutor_interactions, prof_interactions):
+
+    reproved_rows = []
+
+    for row in course_table:
+        if row[2] == 'reprovado':
+            reproved_rows.append(row)
+
+    total_reproved = len(reproved_rows)
+    total = len(course_table)
+    balance_number = total - total_reproved*2
+
+    for i in range(balance_number):
+        index = random.randint(0, total_reproved - 1)
+        row = reproved_rows[index]
+        mutated_row = _mutate_row(row, tutor_interactions, prof_interactions)
+        course_table.append(mutated_row)
+
+    return course_table

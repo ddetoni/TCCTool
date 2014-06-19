@@ -61,12 +61,12 @@ def model_RandomForest(train_path, test_path, out_path, info_name):
 
 
 def between_groups_CLEC():
-    basic_path = '../processed_data/ARFF2/CLEC/'
+    basic_path = '../processed_data/ARFF_balanced/CLEC/'
     path = '{0}semestre_{1}/se{2}/clec_S{1}_se{2}_t{3}.arff'
 
     for S in range(1,3):
         for se in range(1,8):
-            out_path = 'sem_atributos/entre_turmas/CLEC/semestre_{0}/se_{1}/'.format(S,se)
+            out_path = 'balanceado/entre_turmas/CLEC/semestre_{0}/se_{1}/'.format(S,se)
             os.makedirs(out_path)
 
             in_path_g1 = path.format(basic_path,S,se,1)
@@ -86,12 +86,12 @@ def between_groups_CLEC():
 
 
 def between_groups_CLPD():
-    basic_path = '../processed_data/ARFF2/CLPD/'
+    basic_path = '../processed_data/ARFF_balanced/CLPD/'
     path = '{0}semestre_{1}/se{2}/clpd_S{1}_se{2}_t{3}.arff'
 
     for S in range(1,3):
         for se in range(1,8):
-            out_path = 'sem_atributos/entre_turmas/CLPD/semestre_{0}/se_{1}/'.format(S,se)
+            out_path = 'balanceado/entre_turmas/CLPD/semestre_{0}/se_{1}/'.format(S,se)
             os.makedirs(out_path)
 
             in_path_g1 = path.format(basic_path,S,se,1)
@@ -111,11 +111,11 @@ def between_groups_CLPD():
 
 
 def between_semester_CLEC():
-    basic_path = '../processed_data/ARFF2/CLEC/'
+    basic_path = '../processed_data/ARFF_balanced/CLEC/'
     path = '{0}semestre_{1}/se{2}/clec_S{1}_se{2}_t{3}.arff'
 
     for se in range(1,8):
-        out_path = 'sem_atributos/entre_semestres/CLEC/se{0}/'.format(se)
+        out_path = 'balanceado/entre_semestres/CLEC/se{0}/'.format(se)
         os.makedirs(out_path)
 
         in_path_11 = path.format(basic_path,1,se, 1)
@@ -161,11 +161,11 @@ def between_semester_CLEC():
 
 
 def between_semester_CLPD():
-    basic_path = '../processed_data/ARFF2/CLPD/'
+    basic_path = '../processed_data/ARFF_balanced/CLPD/'
     path = '{0}semestre_{1}/se{2}/clpd_S{1}_se{2}_t{3}.arff'
 
     for se in range(1,8):
-        out_path = 'sem_atributos/entre_semestres/CLPD/se{0}/'.format(se)
+        out_path = 'balanceado/entre_semestres/CLPD/se{0}/'.format(se)
         os.makedirs(out_path)
 
         in_path_11 = path.format(basic_path,1,se, 1)
